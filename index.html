@@ -7,7 +7,7 @@
   <meta name="description" content="Partha Pratim Saha &mdash; AI Researcher specialising in Mechanistic Interpretability, Geometric Deep Learning, AI Alignment, and LLMs. BITS Pilani M.Tech, NeurIPS author, Springer published."/>
   <meta name="keywords" content="Partha Pratim Saha, mechanistic interpretability, AI alignment, torsion, Riemannian geometry, DPO, RLHF, LLM, NLP, federated learning, BITS Pilani"/>
   <meta property="og:title" content="Partha Pratim Saha | AI Researcher"/>
-  <meta property="og:description" content="Mechanistic Interpretability, Geometric Deep Learning, AI Alignment. NeurIPS 2025, SpringerNature, ICML 2026."/>
+  <meta property="og:description" content="Mechanistic Interpretability, Geometric Deep Learning, AI Alignment. NeurIPS 2025, SpringerNature."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
   <style>
@@ -75,14 +75,18 @@
 
     /* PHOTO STACK */
     .photo-stack{display:flex;flex-direction:column;gap:.7rem;align-items:center;padding-top:.5rem}
-    .photo-main{width:152px;height:152px;border-radius:50%;object-fit:cover;object-position:top center;border:3px solid var(--white);box-shadow:var(--shadow-md),0 0 0 1px var(--border);display:block}
-    .photo-travel{width:108px;height:108px;border-radius:12px;object-fit:cover;object-position:top center;border:2px solid var(--white);box-shadow:var(--shadow-sm),0 0 0 1px var(--border);display:block}
+    .photo-main{width:152px;height:152px;border-radius:50%;object-fit:cover;object-position:top center;border:3px solid var(--white);box-shadow:var(--shadow-md),0 0 0 1px var(--border);display:block;background:var(--bg-subtle)}
+    .photo-travel{width:108px;height:108px;border-radius:12px;object-fit:cover;object-position:top center;border:2px solid var(--white);box-shadow:var(--shadow-sm),0 0 0 1px var(--border);display:block;background:var(--bg-subtle)}
+    .photo-placeholder{display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;color:var(--text-muted);background:linear-gradient(135deg,var(--bg-subtle),var(--border))}
+    .photo-main.photo-placeholder{font-size:2.2rem}
+    .photo-travel.photo-placeholder{font-size:1.5rem;border-radius:12px}
 
     /* GITHUB STATS */
     #stats{background:var(--off-white)}
     .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:.9rem}
-    .stats-grid img,.contrib-img{width:100%;border-radius:var(--r);border:1px solid var(--border);display:block;transition:box-shadow .2s}
+    .stats-grid img,.contrib-img{width:100%;border-radius:var(--r);border:1px solid var(--border);display:block;transition:box-shadow .2s;min-height:120px;background:var(--white)}
     .stats-grid img:hover,.contrib-img:hover{box-shadow:var(--shadow-md)}
+    .stats-grid img[src=""],.stats-grid img:not([src]),.contrib-img[src=""],.contrib-img:not([src]){background:var(--bg-subtle)}
     .stats-caption{font-family:var(--mono);font-size:.7rem;color:var(--text-muted);text-align:center;margin-top:.6rem}
 
     /* ABOUT */
@@ -263,18 +267,20 @@
           I build <strong>differential-geometric and information-geometric frameworks</strong>
           to understand how LLMs encode, propagate, and transform beliefs across layers
           &mdash; and how alignment, fine-tuning, and cultural model merging alter that
-          internal geometry. My flagship framework, <strong><a href="#research">Torsional Belief Vector Fields (TBVF)</a></strong>,
-          reveals geometrically localised &ldquo;brake layers&rdquo; created by DPO alignment,
-          published under review at <strong>ICML 2026</strong>.
-          Previously published at <strong>NeurIPS 2025</strong> and <strong>SpringerNature ICOMP&rsquo;24</strong>.
+          internal geometry.
+          Published at <strong>NeurIPS 2025</strong> and <strong>SpringerNature ICOMP&rsquo;24</strong>.
         </p>
 
         <div class="action-row">
+          <!-- TBVF paper button hidden for double-blind review — uncomment to restore
           <a href="https://github.com/pps121/torsional-belief-vector-field/raw/main/papers/ICML2026_MechInterp_Workshop.pdf"
              class="btn btn-primary" target="_blank">Read TBVF Paper</a>
           <a href="https://github.com/pps121/torsional-belief-vector-field"
              class="btn btn-outline" target="_blank">Code &amp; Data</a>
+          -->
+          <a href="#research" class="btn btn-primary">View Research</a>
           <a href="#publications" class="btn btn-outline">All Publications</a>
+          <a href="images/CV_Partha.pdf" class="btn btn-outline" target="_blank">Download CV</a>
         </div>
       </div>
 
@@ -282,8 +288,8 @@
       <div class="photo-stack">
         <img src="images/photo_main.jpg" alt="Partha Pratim Saha"
              class="photo-main"
-             onerror="this.style.background='#f2f0eb';this.style.display='flex'"/>
-        <img src="images/photo_secondary.jpg" alt="Partha Pratim Saha"
+             onerror="this.classList.add('photo-placeholder');this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'152\' height=\'152\'%3E%3C/svg%3E';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.insertAdjacentHTML('afterend','');this.outerHTML='<div class=\'photo-main photo-placeholder\' aria-label=\'Partha Pratim Saha\'>PPS</div>'"/>
+        <img src="images/photo_secondary.jpg" alt="Field work"
              class="photo-travel"
              onerror="this.style.display='none'"/>
       </div>
@@ -297,10 +303,10 @@
     <div class="sec-eyebrow">Open Research</div>
     <div class="sec-title">GitHub Activity</div>
     <div class="stats-grid">
-      <img src="https://github-readme-stats.vercel.app/api?username=pps121&show_icons=true&hide_border=true&bg_color=f8f7f4&title_color=2b52cc&icon_color=2b52cc&text_color=1e1c19&rank_icon=github&include_all_commits=true" alt="GitHub Stats" loading="lazy"/>
-      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=pps121&layout=compact&hide_border=true&bg_color=f8f7f4&title_color=2b52cc&text_color=1e1c19&langs_count=6" alt="Top Languages" loading="lazy"/>
+      <img src="https://github-readme-stats.vercel.app/api?username=pps121&show_icons=true&hide_border=true&bg_color=f8f7f4&title_color=2b52cc&icon_color=2b52cc&text_color=1e1c19&rank_icon=github&include_all_commits=true&cache_seconds=1800" alt="GitHub Stats" loading="lazy" onerror="this.style.minHeight='0';this.style.display='none';this.nextElementSibling&&(this.nextElementSibling.style.gridColumn='1 / -1')"/>
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=pps121&layout=compact&hide_border=true&bg_color=f8f7f4&title_color=2b52cc&text_color=1e1c19&langs_count=6&cache_seconds=1800" alt="Top Languages" loading="lazy" onerror="this.style.minHeight='0';this.style.display='none'"/>
     </div>
-    <img class="contrib-img" src="https://github-readme-activity-graph.vercel.app/graph?username=pps121&theme=minimal&bg_color=f8f7f4&color=2b52cc&line=2b52cc&point=1f3ea0&area=true&area_color=eef2fd&hide_border=true" alt="Contribution Graph" loading="lazy"/>
+    <img class="contrib-img" src="https://github-readme-activity-graph.vercel.app/graph?username=pps121&theme=minimal&bg_color=f8f7f4&color=2b52cc&line=2b52cc&point=1f3ea0&area=true&area_color=eef2fd&hide_border=true" alt="Contribution Graph" loading="lazy" onerror="this.style.display='none'"/>
     <p class="stats-caption">github.com/pps121 &nbsp;&middot;&nbsp; torsional-belief-vector-field &nbsp;&middot;&nbsp; pps121.github.io</p>
   </div>
 </section>
@@ -474,6 +480,22 @@
           <span class="etag">Cross-functional Team Leadership</span>
         </div>
       </div>
+      <div class="exp-card" style="grid-column:1/-1">
+        <div class="exp-card-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b52cc" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          Industrial Projects
+        </div>
+        <div class="exp-tags">
+          <span class="etag" title="Wipro · Lead Data Scientist · 0.3M users">💬 Conversational Dialog System &mdash; Wipro (IBM Watson, 0.3M users)</span>
+          <span class="etag" title="BirlaSoft / J&amp;J R&amp;D · Senior Data Scientist · 0.1M users">🔬 Medical Search Engine &mdash; BirlaSoft / J&amp;J R&amp;D (SciBERT, SciSpacy, 0.1M users)</span>
+          <span class="etag" title="IIT Kanpur · Project Engineer · Cyber-Security">🛡️ Threat Intelligence System &mdash; IIT Kanpur (Python, Drupal, Django)</span>
+          <span class="etag" title="Infosys · Senior Systems Engineer · Cancer Genomics">🧬 Cancer Genomics &amp; DNA Alignment &mdash; Infosys (Multiple Myeloma, Needleman-Wunsch)</span>
+          <span class="etag">IBM Watson · SciBERT · SciSpacy · Word2Vec · NLP Pipelines</span>
+          <span class="etag">Dialog Flow · Flask · NodeJS · IBM Cloud · Azure · AWS</span>
+          <span class="etag">Cyber-Security · Threat Intelligence · Django · Drupal</span>
+          <span class="etag">Bioinformatics · FASTQ · Dynamic Programming · NumPy · Pandas</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -484,7 +506,7 @@
     <div class="sec-eyebrow">03 &middot; Research</div>
     <div class="sec-title">Research Projects</div>
 
-    <!-- TBVF -->
+    <!-- TBVF: commented out for double-blind review — uncomment to make visible
     <div class="research-card">
       <div class="rc-header">
         <div class="rc-title">Torsional Belief Vector Fields (TBVF) &mdash; AI Safety &amp; Mechanistic Interpretability</div>
@@ -521,6 +543,7 @@
         <span class="tag">DPO</span><span class="tag">OLMo-7B</span><span class="tag">Mistral-7B</span><span class="tag">Zephyr-7B</span>
       </div>
     </div>
+    -->
 
     <!-- nDNA -->
     <div class="research-card">
@@ -592,7 +615,7 @@
     <div class="sec-title">Papers &amp; Publications</div>
     <div class="pub-list">
 
-      <!-- ICML 2026 -->
+      <!-- ICML 2026: commented out for double-blind review — uncomment to make visible
       <div class="pub-item">
         <div class="pub-year">2026</div>
         <div>
@@ -606,6 +629,7 @@
           </div>
         </div>
       </div>
+      -->
 
       <!-- SPINAL -->
       <div class="pub-item">
