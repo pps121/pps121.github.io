@@ -117,7 +117,7 @@
 
     /* RESEARCH */
     .research-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1.65rem;margin-bottom:1.1rem;transition:box-shadow .2s,border-color .2s;position:relative;overflow:hidden}
-    .research-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#7c3aed)}
+    .research-card::before{content:"";display:none}
     .research-card:hover{box-shadow:var(--shadow-md);border-color:var(--border-mid)}
     .rc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.85rem}
     .rc-title{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--text);line-height:1.4}
@@ -316,7 +316,7 @@
       <div class="about-body">
         <p>
           I am an AI researcher and lecturer with over <strong>12 years of combined experience</strong>
-          in industry (Infosys, BirlaSoft/J&amp;J, Wipro, IIT Kanpur) and academia
+          in industry and academia
           (BITS Pilani M.Tech &mdash; 9.08 GPA, top 5%), now focused full-time on
           foundational research in <strong>mechanistic interpretability, AI alignment,
           and geometric deep learning</strong>.
@@ -404,6 +404,14 @@
     <div class="sec-eyebrow">02 &middot; Recognition</div>
     <div class="sec-title">Awards &amp; Achievements</div>
     <div class="awards-grid">
+      <div class="award-item" style="border-color:#fde68a;background:linear-gradient(135deg,#fffbeb,#fef9c3);grid-column:1/-1;">
+        <div class="award-icon">🏆</div>
+        <div class="award-text"><strong>MIT Hack-Nation Global AI Hackathon</strong> &mdash; Accepted to the 6th <em>Hack-Nation Global AI Hackathon</em> organised by the <strong>MIT Club of Northern California, MIT Club of Boston, and MIT Club of Germany</strong>. Excited to build and compete on real-world AI challenges alongside a global cohort &mdash; 2026.</div>
+      </div>
+      <div class="award-item" style="border-color:#a5f3fc;background:linear-gradient(135deg,#ecfeff,#e0f2fe);grid-column:1/-1;">
+        <div class="award-icon">🌟</div>
+        <div class="award-text"><strong>Emerging Leaders in AI (ELAI) Graduate Program</strong> &mdash; Selected as a participant in the <em>Emerging Leaders in AI (ELAI)</em> Graduate Program, committing 5 hours bi-weekly to advancing AI literacy, research, and leadership in the global AI community &mdash; 2026.</div>
+      </div>
       <div class="award-item" style="border-color:#ef4444; background:linear-gradient(135deg, #fef2f2 0%, #ffe4e6 100%); grid-column:1/-1; padding: 1.5rem; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2); transform: scale(1.02); transition: transform 0.3s ease;">
         <div class="award-icon" style="font-size: 2.5rem;">⭐</div>
         <div class="award-text" style="font-size: 1.1rem; line-height: 1.5;">
@@ -552,10 +560,10 @@
       <div class="pub-item">
         <div class="pub-year">2026</div>
         <div>
-          <span class="pub-venue-badge v-preprint">Under Review · NeurIPS 2026</span>
+          <span class="pub-venue-badge v-preprint">Under Review</span>
           <div class="pub-title">MENTIS: What Belief Changes Under Alignment? Multi-Scale Latent Torsion in Language Models</div>
           <div class="pub-authors"><strong>Partha Pratim Saha</strong>, Samarth Raina, Mayur Parvatikar, Amit Dhanda, Vinija Jain, Aman Chadha, Amitava Das</div>
-          <div class="pub-desc">Under review (NeurIPS 2026) &middot; 8 new torsion metrics, full LITMUS benchmark study, DPO suppression 44.4% (Cohen&rsquo;s d=0.741, p=7.7&times;10&sup1;&sup3;), entropy&ndash;torsion bridge &rho;=&minus;0.387</div>
+          <div class="pub-desc">8 new torsion metrics, full LITMUS benchmark study, DPO suppression 44.4% (Cohen&rsquo;s d=0.741, p=7.7&times;10&sup1;&sup3;), entropy&ndash;torsion bridge &rho;=&minus;0.387</div>
           <div class="pub-links">
             <a href="https://github.com/pps121/torsional-belief-vector-field" class="plink" target="_blank">GitHub</a>
           </div>
@@ -618,7 +626,7 @@
     <!-- AI SAFETY RESEARCH: Path to Impact -->
     <div class="research-card" style="border-color:#bbf7d0;background:linear-gradient(135deg,#f0fdf4,#fff)">
       <div class="rc-header">
-        <div class="rc-title">AI Safety Research Programme &mdash; Path to Impact</div>
+        <div class="rc-title">AI Safety Research Programme</div>
         <span class="rc-badge" style="background:#dcfce7;color:#166534;border-color:#86efac">Core Research Focus</span>
       </div>
       <p class="rc-body">
@@ -637,15 +645,7 @@
         (normative vs factual) &nbsp;&middot;&nbsp; Entropy&ndash;torsion bridge
         <span class="hl">&rho; = &minus;0.387</span> (Mistral, p=5.43&times;10<sup>&minus;30</sup>)
       </div>
-      <p class="rc-body" style="font-size:.88rem">
-        <strong>How I plan to create impact:</strong> (1) Develop post-hoc geometric probes that are
-        compute-efficient enough for deployment-time monitoring; (2) Collaborate with world-leading
-        AI safety labs (Anthropic, Redwood, ARC Evals, Mech Interp groups at Oxford/Cambridge/MIT/CMU)
-        to validate geometric torsion findings against circuit-level mechanistic analysis;
-        (3) Pursue a fully-funded PhD at a programme with strong AI safety infrastructure to work
-        on scalable interpretability tools deployable beyond 7B-parameter models.
-        I am actively applying for research fellowships, internships, and PhD positions starting 2026.
-      </p>
+
       <div class="metric-row">
         <div class="mbox"><span class="mnum">8</span><div class="mlabel">Geometric torsion metrics (8-scale)</div></div>
         <div class="mbox"><span class="mnum">3&times;2</span><div class="mlabel">IT/PA model pairs tested</div></div>
