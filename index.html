@@ -27,8 +27,8 @@ nav{padding:1rem 0 .5rem;display:flex;justify-content:space-between;align-items:
 .site-header{padding:1.5rem 0 1rem}
 .header-top{display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap}
 .header-photo{flex-shrink:0}
-.header-photo img{width:120px;height:120px;object-fit:cover;border-radius:4px;border:1px solid #ddd}
-.photo-fallback{width:120px;height:120px;background:#f0f0f0;border:1px solid #ddd;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:"EB Garamond",serif;font-size:1.6rem;color:#555}
+.header-photo img{width:150px;height:165px;object-fit:cover;object-position:center top;border-radius:4px;border:1px solid #ccc;box-shadow:2px 2px 8px rgba(0,0,0,.12)}
+.photo-fallback{width:150px;height:165px;background:#f0f0f0;border:1px solid #ddd;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:"EB Garamond",serif;font-size:1.6rem;color:#555}
 .header-info h1{font-family:"EB Garamond",serif;font-size:2rem;font-weight:600;line-height:1.2;margin-bottom:.3rem}
 .header-role{font-family:"Inter",sans-serif;font-size:.88rem;color:#444;margin-bottom:.5rem}
 .contact-line{font-family:"Inter",sans-serif;font-size:.82rem;color:#333;display:flex;flex-wrap:wrap;gap:.8rem;margin-bottom:.6rem}
@@ -68,7 +68,7 @@ h3{font-family:"EB Garamond",serif;font-size:1.1rem;font-weight:600;margin-botto
 /* AWARDS */
 .award-list{list-style:none}
 .award-item{display:flex;gap:.6rem;margin-bottom:.55rem;align-items:flex-start;font-family:"Inter",sans-serif;font-size:.86rem;line-height:1.5}
-.award-year{flex-shrink:0;font-family:"JetBrains Mono",monospace;font-size:.72rem;color:#888;padding-top:.15rem;min-width:2.5rem}
+.award-year{display:none}
 .award-star{flex-shrink:0;color:#b45309}
 
 /* EXPERIENCE */
@@ -299,67 +299,67 @@ footer{font-family:"Inter",sans-serif;font-size:.78rem;color:#888;padding:1.5rem
     </li>
 
     <li class="award-item">
-      <span class="award-year">2025–26</span>
+      <span class="award-star">★</span>
       <span><strong>SPAR Demo Day (2025 &amp; 2026)</strong> — AI Safety &amp; Alignment research demonstration (Neuromatch / AI Safety cohort).</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2025</span>
+      <span class="award-star">★</span>
       <span><strong>NeurIPS 2025 Reviewer</strong> — Selected to serve as reviewer for the MTI-LLM Workshop.</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2025</span>
+      <span class="award-star">★</span>
       <span><strong>5× Google Colab Pro A100/H100 GPU (300 units each)</strong> awarded by Neuromatch Academy for AI Safety research.</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2025</span>
+      <span class="award-star">★</span>
       <span><strong>AWS AI &amp; ML Scholar</strong> by Udacity (2025).</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2025</span>
+      <span class="award-star">★</span>
       <span><strong>90% Scholarship — Armenian LLM Summer School 2025</strong>; attended Duke ML Summer School 2025, Cohere Summer School 2025, IIIT Hyderabad Summer School.</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2026</span>
+      <span class="award-star">★</span>
       <span><strong>Neuromatch Academy — Deep Learning 2026</strong> (Jul 6–24, 2026) — competitive global selection as student for the intensive programme.</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2024–25</span>
+      <span class="award-star">★</span>
       <span><strong>MLx Generative AI Scholarship Grant (2024 &amp; 2025)</strong> — Oxford ML Summer School.</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2024</span>
+      <span class="award-star">★</span>
       <span><strong>University of Chicago DSI Summer School 2024</strong> — AI-Science Research Program; Eric &amp; Wendy Schmidt Postdoctoral Fellowship (Schmidt Futures).</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2024</span>
+      <span class="award-star">★</span>
       <span><strong>Athens NLP Summer School 2024</strong>; <strong>diiP Summer School, Paris 2024</strong> — Deep Learning &amp; Interpretability in Practice.</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2022</span>
+      <span class="award-star">★</span>
       <span><strong>NYU AI Summer School 2022</strong> — New York University; competitive selection.</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2022</span>
+      <span class="award-star">★</span>
       <span><strong>Distinction — BITS Pilani M.Tech</strong> (GPA 9.08/10, Top 5% out of 600).</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2021</span>
+      <span class="award-star">★</span>
       <span><strong>AI4 IMPACT Scholar</strong> — AI Singapore Summer School 2021; <strong>Udacity Bertelsmann Technology Scholarship</strong> by Google.</span>
     </li>
 
     <li class="award-item">
-      <span class="award-year">2019</span>
+      <span class="award-star">★</span>
       <span><strong>Google Developer's Program, Google India 2019</strong> — competitive global selection.</span>
     </li>
 
@@ -509,7 +509,7 @@ footer{font-family:"Inter",sans-serif;font-size:.78rem;color:#888;padding:1.5rem
 <section id="contact">
   <h2>Contact</h2>
   <p style="font-family:'Inter',sans-serif;font-size:.9rem;color:#222;line-height:1.8">
-    I am actively seeking <strong>fully-funded PhD positions</strong> in AI Safety, NLP, and LLM Alignment (2026 intake).<br/>
+    I am actively seeking <strong>fully-funded PhD positions</strong> in AI Safety, NLP, and LLM Alignment.<br/>
     I welcome contact from faculty and researchers working on interpretable, responsible, and safe AI systems.
   </p>
   <p style="font-family:'Inter',sans-serif;font-size:.9rem;margin-top:.75rem">
