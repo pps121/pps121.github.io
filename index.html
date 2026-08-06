@@ -1,1021 +1,527 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Partha Pratim Saha &mdash; AI Researcher &amp; Mechanistic Interpretability</title>
-  <meta name="description" content="Partha Pratim Saha — AI Safety researcher specialising in Mechanistic Interpretability, AI Deception Detection, Geometric Deep Learning, AI Alignment, and LLMs. GRAFT accepted at ICML 2026 Mechanistic Interpretability Workshop. BITS Pilani M.Tech, NeurIPS author, Springer published."/>
-  <meta name="keywords" content="Partha Pratim Saha, AI safety, mechanistic interpretability, AI alignment, AI deception, AI deception detection, torsion, belief vector field, BlueDot Impact, Riemannian geometry, DPO, RLHF, LLM, NLP, BITS Pilani"/>
-  <meta property="og:title" content="Partha Pratim Saha | AI Researcher"/>
-  <meta property="og:description" content="Mechanistic Interpretability, Geometric Deep Learning, AI Alignment. GRAFT accepted at ICML 2026 Mech. Interp. Workshop. NeurIPS 2025, SpringerNature."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth;font-size:16px}
-    :root{
-      --white:#fff;--off-white:#f8f7f4;--bg-subtle:#f2f0eb;
-      --border:#e5e2db;--border-mid:#d4d0c8;
-      --text:#1e1c19;--text-mid:#4f4b44;--text-muted:#8a857c;
-      --accent:#2b52cc;--accent-hover:#1f3ea0;--accent-light:#eef2fd;
-      --green:#166534;--green-bg:#f0fdf4;--green-border:#bbf7d0;
-      --shadow-sm:0 1px 3px rgba(0,0,0,.07),0 1px 2px rgba(0,0,0,.05);
-      --shadow-md:0 4px 16px rgba(0,0,0,.08),0 2px 6px rgba(0,0,0,.05);
-      --r:10px;--mw:840px;
-      --serif:"Lora",Georgia,serif;
-      --sans:"Inter",system-ui,sans-serif;
-      --mono:"JetBrains Mono",monospace
-    }
-    body{font-family:var(--sans);background:var(--white);color:var(--text);line-height:1.75;-webkit-font-smoothing:antialiased}
-    a{color:var(--accent);text-decoration:none}
-    a:hover{text-decoration:underline}
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Partha Pratim Saha — AI Safety · NLP · LLM Alignment</title>
+<meta name="description" content="Partha Pratim Saha — Prospective PhD applicant in AI Safety, NLP, and LLM Alignment. ICML 2026, NeurIPS 2025, SpringerNature. BITS Pilani M.Tech 9.08 GPA."/>
+<meta name="keywords" content="Partha Pratim Saha, AI Safety, NLP, LLM Alignment, Mechanistic Interpretability, BITS Pilani, ICML, NeurIPS, PhD applicant"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:"EB Garamond",Georgia,serif;background:#fff;color:#111;line-height:1.7;max-width:860px;margin:0 auto;padding:0 1.25rem}
+a{color:#1a0dab;text-decoration:none}
+a:hover{text-decoration:underline}
+hr{border:none;border-top:1px solid #ccc;margin:2rem 0}
 
-    /* NAV */
-    nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
-    .nav-inner{max-width:var(--mw);margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:56px}
-    .nav-logo{font-family:var(--serif);font-weight:600;font-size:.98rem;color:var(--text);letter-spacing:-.01em}
-    .nav-links{display:flex;gap:.15rem}
-    .nav-links a{font-size:.835rem;font-weight:500;color:var(--text-mid);padding:.3rem .65rem;border-radius:6px;transition:background .15s,color .15s}
-    .nav-links a:hover{background:var(--bg-subtle);color:var(--text);text-decoration:none}
+/* NAV */
+nav{padding:1rem 0 .5rem;display:flex;justify-content:space-between;align-items:baseline;border-bottom:2px solid #111;margin-bottom:1.5rem;flex-wrap:wrap;gap:.4rem}
+.nav-name{font-family:"EB Garamond",serif;font-size:1.1rem;font-weight:600;color:#111}
+.nav-links{display:flex;gap:1.2rem;flex-wrap:wrap}
+.nav-links a{font-family:"Inter",sans-serif;font-size:.8rem;font-weight:500;color:#111;text-transform:uppercase;letter-spacing:.04em}
+.nav-links a:hover{color:#1a0dab;text-decoration:none}
 
-    /* PAGE / SECTION */
-    .page{max-width:var(--mw);margin:0 auto;padding:0 1.5rem}
-    section{padding:3.75rem 0;border-bottom:1px solid var(--border)}
-    section:last-of-type{border-bottom:none}
+/* HEADER */
+.site-header{padding:1.5rem 0 1rem}
+.header-top{display:flex;gap:2rem;align-items:flex-start;flex-wrap:wrap}
+.header-photo{flex-shrink:0}
+.header-photo img{width:120px;height:120px;object-fit:cover;border-radius:4px;border:1px solid #ddd}
+.photo-fallback{width:120px;height:120px;background:#f0f0f0;border:1px solid #ddd;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:"EB Garamond",serif;font-size:1.6rem;color:#555}
+.header-info h1{font-family:"EB Garamond",serif;font-size:2rem;font-weight:600;line-height:1.2;margin-bottom:.3rem}
+.header-role{font-family:"Inter",sans-serif;font-size:.88rem;color:#444;margin-bottom:.5rem}
+.contact-line{font-family:"Inter",sans-serif;font-size:.82rem;color:#333;display:flex;flex-wrap:wrap;gap:.8rem;margin-bottom:.6rem}
+.contact-line a{color:#1a0dab}
+.cv-link{font-family:"Inter",sans-serif;font-size:.82rem;display:inline-block;padding:.25rem .75rem;border:1px solid #111;border-radius:2px;color:#111;font-weight:500}
+.cv-link:hover{background:#111;color:#fff;text-decoration:none}
 
-    /* SEC LABEL & TITLE */
-    .sec-eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:.35rem}
-    .sec-title{font-family:var(--serif);font-size:1.45rem;font-weight:600;color:var(--text);letter-spacing:-.02em;margin-bottom:1.75rem}
+/* OBJECTIVE STATEMENT */
+.objective{font-family:"Inter",sans-serif;font-size:1rem;font-weight:600;color:#000;background:#f8f8f8;border-left:4px solid #111;padding:.75rem 1rem;margin:1.25rem 0;line-height:1.5}
 
-    /* HERO */
-    #hero{padding:3.5rem 0 3rem}
-    .hero-grid{display:grid;grid-template-columns:1fr 176px;gap:2.5rem;align-items:start}
-    .hero-name{font-family:var(--serif);font-size:clamp(1.9rem,3.5vw,2.6rem);font-weight:600;line-height:1.12;color:var(--text);letter-spacing:-.025em;margin-bottom:.4rem}
-    .hero-role{font-size:.9rem;color:var(--text-muted);letter-spacing:.015em;margin-bottom:1.1rem;line-height:1.6}
-    .badge{display:inline-flex;align-items:center;gap:.4rem;background:var(--green-bg);border:1px solid var(--green-border);border-radius:100px;padding:.3rem .85rem;font-size:.78rem;font-weight:600;color:var(--green);margin-bottom:1.3rem}
-    .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2.2s ease-in-out infinite}
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-    .hero-bio{font-size:.97rem;color:var(--text-mid);line-height:1.82;margin-bottom:1.4rem}
-    .hero-bio strong{color:var(--text);font-weight:600}
-    .hero-bio a{color:var(--accent);font-weight:500}
+/* SECTION */
+section{margin-bottom:2rem}
+h2{font-family:"EB Garamond",serif;font-size:1.35rem;font-weight:600;color:#111;border-bottom:1px solid #ccc;padding-bottom:.2rem;margin-bottom:1rem;letter-spacing:-.01em}
+h3{font-family:"EB Garamond",serif;font-size:1.1rem;font-weight:600;margin-bottom:.15rem}
 
-    /* SOCIAL LINKS ROW */
-    .social-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
-    .sl{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:500;color:var(--text-mid);background:var(--off-white);border:1px solid var(--border);border-radius:7px;padding:.3rem .75rem;transition:all .15s;text-decoration:none}
-    .sl:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light);text-decoration:none}
+/* RESEARCH INTERESTS */
+.interests{font-family:"Inter",sans-serif;font-size:.88rem;color:#222;line-height:1.8}
 
-    /* ACTION BTNS */
-    .action-row{display:flex;flex-wrap:wrap;gap:.55rem}
-    .btn{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border-radius:7px;font-size:.84rem;font-weight:600;text-decoration:none;transition:all .17s;border:1.5px solid transparent;white-space:nowrap}
-    .btn:hover{text-decoration:none}
-    .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-    .btn-primary:hover{background:var(--accent-hover);border-color:var(--accent-hover);transform:translateY(-1px);box-shadow:0 4px 14px rgba(43,82,204,.3)}
-    .btn-outline{background:transparent;color:var(--text);border-color:var(--border-mid)}
-    .btn-outline:hover{background:var(--off-white);border-color:var(--accent);color:var(--accent)}
+/* PUBLICATIONS */
+.pub-list{list-style:none}
+.pub-item{margin-bottom:1.2rem;padding-bottom:1.2rem;border-bottom:1px solid #eee}
+.pub-item:last-child{border-bottom:none}
+.pub-badge{font-family:"Inter",sans-serif;font-size:.7rem;font-weight:600;padding:.1rem .45rem;border-radius:2px;text-transform:uppercase;letter-spacing:.05em;margin-right:.4rem;display:inline-block;margin-bottom:.25rem}
+.badge-icml{background:#dbeafe;color:#1d4ed8;border:1px solid #bfdbfe}
+.badge-neurips{background:#d1fae5;color:#065f46;border:1px solid #6ee7b7}
+.badge-springer{background:#fff3e0;color:#b45309;border:1px solid #fcd34d}
+.badge-journal{background:#f3e8ff;color:#6d28d9;border:1px solid #d8b4fe}
+.badge-preprint{background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
+.pub-title{font-family:"EB Garamond",serif;font-size:1.05rem;font-weight:600;line-height:1.4;margin-bottom:.2rem}
+.pub-authors{font-family:"Inter",sans-serif;font-size:.83rem;color:#333;margin-bottom:.2rem}
+.pub-authors strong{color:#000}
+.pub-venue{font-family:"Inter",sans-serif;font-size:.82rem;color:#555;margin-bottom:.2rem}
+.pub-links{font-family:"Inter",sans-serif;font-size:.8rem;display:flex;gap:.8rem;flex-wrap:wrap}
+.pub-links a{color:#1a0dab}
+.pub-contrib{font-family:"Inter",sans-serif;font-size:.78rem;color:#555;font-style:italic;margin-top:.2rem}
 
-    /* PHOTO STACK */
-    .photo-stack{display:flex;flex-direction:column;gap:.7rem;align-items:center;padding-top:.5rem}
-    .photo-main{width:152px;height:152px;border-radius:50%;object-fit:cover;object-position:25% 20%;border:3px solid var(--white);box-shadow:var(--shadow-md),0 0 0 1px var(--border);display:block;background:var(--bg-subtle)}
-    .photo-travel{width:108px;height:108px;border-radius:12px;object-fit:cover;object-position:top center;border:2px solid var(--white);box-shadow:var(--shadow-sm),0 0 0 1px var(--border);display:block;background:var(--bg-subtle)}
-    .photo-placeholder{display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:600;color:var(--text-muted);background:linear-gradient(135deg,var(--bg-subtle),var(--border))}
-    .photo-main.photo-placeholder{font-size:2.2rem}
-    .photo-travel.photo-placeholder{font-size:1.5rem;border-radius:12px}
+/* AWARDS */
+.award-list{list-style:none}
+.award-item{display:flex;gap:.6rem;margin-bottom:.55rem;align-items:flex-start;font-family:"Inter",sans-serif;font-size:.86rem;line-height:1.5}
+.award-year{flex-shrink:0;font-family:"JetBrains Mono",monospace;font-size:.72rem;color:#888;padding-top:.15rem;min-width:2.5rem}
+.award-star{flex-shrink:0;color:#b45309}
 
-    /* GITHUB STATS */
-    #stats{background:var(--off-white)}
-    .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin-bottom:.9rem}
-    .stats-grid img,.contrib-img{width:100%;border-radius:var(--r);border:1px solid var(--border);display:block;transition:box-shadow .2s;min-height:120px;background:var(--white)}
-    .stats-grid img:hover,.contrib-img:hover{box-shadow:var(--shadow-md)}
-    .stats-grid img[src=""],.stats-grid img:not([src]),.contrib-img[src=""],.contrib-img:not([src]){background:var(--bg-subtle)}
-    .stats-caption{font-family:var(--mono);font-size:.7rem;color:var(--text-muted);text-align:center;margin-top:.6rem}
+/* EXPERIENCE */
+.exp-entry{margin-bottom:1.5rem}
+.exp-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.3rem;margin-bottom:.15rem}
+.exp-role{font-family:"EB Garamond",serif;font-size:1.05rem;font-weight:600}
+.exp-period{font-family:"JetBrains Mono",monospace;font-size:.75rem;color:#666}
+.exp-org{font-family:"Inter",sans-serif;font-size:.86rem;color:#444;margin-bottom:.3rem}
+.exp-desc{font-family:"Inter",sans-serif;font-size:.84rem;color:#333;line-height:1.6}
 
-    /* ABOUT */
-    .about-grid{display:grid;grid-template-columns:2fr 1fr;gap:2.5rem;align-items:start}
-    .about-body p{font-size:.97rem;color:var(--text-mid);line-height:1.85;margin-bottom:1.1rem}
-    .about-body p strong{color:var(--text)}
-    .about-body a{color:var(--accent)}
-    .quote-block{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--text-mid);border-left:3px solid var(--accent);padding:.5rem 0 .5rem 1.2rem;margin:1.5rem 0 1.2rem}
+/* EDUCATION */
+.edu-entry{margin-bottom:1rem}
+.edu-degree{font-family:"EB Garamond",serif;font-size:1.05rem;font-weight:600}
+.edu-school{font-family:"Inter",sans-serif;font-size:.86rem;color:#333}
+.edu-detail{font-family:"JetBrains Mono",monospace;font-size:.75rem;color:#666}
 
-    /* INFO CARD (sidebar) */
-    .info-card{background:#f5ede0;border:1px solid #e2cdb5;border-radius:var(--r);padding:1.3rem;display:flex;flex-direction:column;gap:0}
-    .info-section-title{font-family:var(--mono);font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);font-weight:600;padding:.75rem 0 .4rem;border-top:1px solid var(--border);margin-top:.5rem}
-    .info-section-title:first-child{border-top:none;padding-top:0;margin-top:0}
-    .info-item{display:flex;flex-direction:column;padding:.35rem 0;border-bottom:1px solid var(--border)}
-    .info-item:last-child{border-bottom:none}
-    .info-label{font-size:.7rem;color:var(--text-muted);font-weight:500;margin-bottom:.1rem}
-    .info-val{font-size:.85rem;color:var(--text);font-weight:500;line-height:1.4}
-    .info-val a{color:var(--accent)}
+/* SKILLS */
+.skill-group{margin-bottom:.65rem;font-family:"Inter",sans-serif;font-size:.84rem}
+.skill-label{font-weight:600;color:#111}
+.skill-val{color:#333}
 
-    /* EXPERTISE */
-    #expertise{background:var(--off-white)}
-    .expertise-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.1rem}
-    .exp-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;transition:box-shadow .2s,border-color .2s}
-    .exp-card:hover{box-shadow:var(--shadow-sm);border-color:var(--border-mid)}
-    .exp-card-title{font-size:.88rem;font-weight:700;color:var(--text);margin-bottom:.55rem;display:flex;align-items:center;gap:.45rem}
-    .exp-tags{display:flex;flex-wrap:wrap;gap:.35rem}
-    .etag{font-size:.73rem;background:var(--off-white);border:1px solid var(--border);border-radius:5px;padding:.15rem .5rem;color:var(--text-mid)}
+/* FOOTER */
+footer{font-family:"Inter",sans-serif;font-size:.78rem;color:#888;padding:1.5rem 0;border-top:1px solid #ddd;text-align:center;margin-top:2rem}
 
-    /* RESEARCH */
-    .research-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:1.65rem;margin-bottom:1.1rem;transition:box-shadow .2s,border-color .2s;position:relative;overflow:hidden}
-    .research-card::before{content:"";display:none}
-    .research-card:hover{box-shadow:var(--shadow-md);border-color:var(--border-mid)}
-    .rc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:.85rem}
-    .rc-title{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--text);line-height:1.4}
-    .rc-badge{flex-shrink:0;font-size:.7rem;font-weight:600;padding:.22rem .6rem;border-radius:5px;background:var(--accent-light);color:var(--accent);border:1px solid #c5d4f8;white-space:nowrap}
-    .rc-body{font-size:.91rem;color:var(--text-mid);line-height:1.78;margin-bottom:.9rem}
-    .highlight-box{background:var(--off-white);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:.7rem .95rem;font-family:var(--mono);font-size:.76rem;color:var(--text-mid);line-height:1.85;margin-bottom:.9rem}
-    .hl{color:var(--accent);font-weight:600}
-    .hl-g{color:var(--green);font-weight:600}
-    .metric-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-bottom:.9rem}
-    .mbox{background:var(--off-white);border:1px solid var(--border);border-radius:8px;padding:.8rem;text-align:center}
-    .mnum{font-family:var(--serif);font-size:1.35rem;font-weight:600;color:var(--accent);display:block}
-    .mlabel{font-size:.7rem;color:var(--text-muted);margin-top:.15rem;line-height:1.3}
-    .tag-row{display:flex;flex-wrap:wrap;gap:.35rem}
-    .tag{font-size:.73rem;font-weight:500;background:var(--accent-light);color:var(--accent);border:1px solid #c5d4f8;border-radius:5px;padding:.18rem .5rem}
-
-    /* PUBLICATIONS */
-    .pub-list{}
-    .pub-item{display:grid;grid-template-columns:48px 1fr;gap:.9rem;padding:1.2rem 0;border-bottom:1px solid var(--border)}
-    .pub-item:last-child{border-bottom:none}
-    .pub-year{font-family:var(--mono);font-size:.75rem;font-weight:600;color:var(--text-muted);padding-top:.15rem}
-    .pub-venue-badge{display:inline-block;font-size:.68rem;font-weight:700;padding:.18rem .5rem;border-radius:4px;margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.04em}
-    .v-neurips{background:#f0fdf4;color:#166534;border:1px solid #bbf7d0}
-    .v-springer{background:#fff7ed;color:#9a3412;border:1px solid #fed7aa}
-    .v-icml{background:var(--accent-light);color:var(--accent);border:1px solid #c5d4f8}
-    .v-journal{background:#fdf4ff;color:#7e22ce;border:1px solid #e9d5ff}
-    .v-preprint{background:#f8fafc;color:#475569;border:1px solid #e2e8f0}
-    .pub-title{font-family:var(--serif);font-size:.97rem;font-weight:600;color:var(--text);line-height:1.45;margin-bottom:.3rem}
-    .pub-authors{font-size:.83rem;color:var(--text-mid);margin-bottom:.25rem;line-height:1.5}
-    .pub-authors strong{color:var(--text)}
-    .pub-desc{font-size:.82rem;color:var(--text-muted);margin-bottom:.5rem;line-height:1.5}
-    .pub-links{display:flex;gap:.4rem;flex-wrap:wrap}
-    .plink{font-size:.76rem;font-weight:500;color:var(--accent);border:1px solid #c5d4f8;background:var(--accent-light);border-radius:5px;padding:.15rem .5rem;transition:all .15s;text-decoration:none}
-    .plink:hover{background:var(--accent);color:#fff;border-color:var(--accent);text-decoration:none}
-
-    /* EXPERIENCE */
-    .exp-list{}
-    .exp-item{display:grid;grid-template-columns:12px 1fr;gap:1.1rem;padding:.9rem 0;border-bottom:1px solid var(--border);position:relative}
-    .exp-item:last-child{border-bottom:none}
-    .exp-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--white);box-shadow:0 0 0 1px var(--border);margin-top:.35rem;flex-shrink:0}
-    .exp-role{font-size:.95rem;font-weight:700;color:var(--text)}
-    .exp-org{font-size:.88rem;font-weight:500;color:var(--accent)}
-    .exp-org a{color:var(--accent)}
-    .exp-period{font-family:var(--mono);font-size:.73rem;color:var(--text-muted);margin:.15rem 0 .4rem}
-    .exp-desc{font-size:.85rem;color:var(--text-mid);line-height:1.7}
-
-    /* AWARDS */
-    .awards-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
-    .award-item{display:flex;align-items:flex-start;gap:.65rem;background:var(--white);border:1px solid var(--border);border-radius:8px;padding:.9rem;transition:box-shadow .15s}
-    .award-item:hover{box-shadow:var(--shadow-sm)}
-    .award-icon{font-size:1.1rem;flex-shrink:0;margin-top:.05rem}
-    .award-text{font-size:.84rem;color:var(--text-mid);line-height:1.55}
-    .award-text strong{color:var(--text)}
-    .award-text a{color:var(--accent)}
-
-    /* EDUCATION */
-    .edu-item{display:grid;grid-template-columns:12px 1fr;gap:1.1rem;padding:.9rem 0;border-bottom:1px solid var(--border)}
-    .edu-item:last-child{border-bottom:none}
-    .edu-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid var(--white);box-shadow:0 0 0 1px var(--border);margin-top:.35rem;flex-shrink:0}
-    .edu-degree{font-size:.95rem;font-weight:700;color:var(--text)}
-    .edu-school{font-size:.88rem;font-weight:500;color:var(--accent)}
-    .edu-period{font-family:var(--mono);font-size:.73rem;color:var(--text-muted);margin:.15rem 0 .3rem}
-    .edu-detail{font-size:.84rem;color:var(--text-mid);line-height:1.65}
-
-    /* CONTACT */
-    #contact{background:var(--off-white)}
-    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start}
-    .contact-text{font-size:.95rem;color:var(--text-mid);line-height:1.82}
-    .contact-text p{margin-bottom:.9rem}
-    .contact-text strong{color:var(--text)}
-    .contact-links{display:flex;flex-direction:column;gap:.55rem}
-    .cl{display:flex;align-items:center;gap:.75rem;background:var(--white);border:1px solid var(--border);border-radius:9px;padding:.8rem .95rem;text-decoration:none;color:var(--text);transition:all .17s}
-    .cl:hover{border-color:var(--accent);box-shadow:var(--shadow-sm);color:var(--accent);text-decoration:none}
-    .cl-ico{font-size:1.05rem;flex-shrink:0}
-    .cl-label{font-size:.88rem;font-weight:600}
-    .cl-sub{font-size:.73rem;color:var(--text-muted)}
-
-    /* FOOTER */
-    footer{background:var(--white);border-top:1px solid var(--border);padding:1.5rem 1.5rem;text-align:center;font-size:.8rem;color:var(--text-muted)}
-    footer a{color:var(--accent)}
-
-    @media(max-width:680px){
-      .hero-grid{grid-template-columns:1fr}
-      .photo-stack{flex-direction:row;justify-content:flex-start;align-items:flex-end;padding-top:0}
-      .photo-main{width:110px;height:110px}
-      .photo-travel{width:80px;height:80px}
-      .stats-grid{grid-template-columns:1fr}
-      .about-grid{grid-template-columns:1fr}
-      .expertise-grid{grid-template-columns:1fr}
-      .metric-row{grid-template-columns:1fr 1fr}
-      .contact-grid{grid-template-columns:1fr}
-      .awards-grid{grid-template-columns:1fr}
-      .nav-links{display:none}
-    }
-  </style>
+/* RESPONSIVE */
+@media(max-width:580px){
+  .header-top{flex-direction:column}
+  .header-photo img,.photo-fallback{width:90px;height:90px}
+  h1{font-size:1.55rem}
+  .exp-header{flex-direction:column}
+}
+</style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <div class="nav-inner">
-    <span class="nav-logo">Partha Pratim Saha</span>
-    <div class="nav-links">
-      <a href="#about">About</a>
-      <a href="#awards">Awards</a>
-      <a href="#publications">Papers</a>
-      <a href="#research">Research</a>
-      <a href="#expertise">Expertise</a>
-      <a href="#experience">Experience</a>
-      <a href="#contact">Contact</a>
-    </div>
+  <span class="nav-name">Partha Pratim Saha</span>
+  <div class="nav-links">
+    <a href="#research">Research</a>
+    <a href="#publications">Publications</a>
+    <a href="#awards">Awards</a>
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
   </div>
 </nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="page">
-    <div class="hero-grid">
-      <div>
-        <div class="badge" style="background:#fff0f0; border-color:#ffcccc; color:#cc0000; box-shadow: 0 0 10px rgba(255,0,0,0.1); line-height: 1.5;"><span class="dot" style="background:#cc0000;"></span>⭐ GRAFT Accepted at ICML 2026 Mech Interp Workshop <br>
-          ⭐ Seeking Fully-Funded PhD in AI Safety/Alignment (2026)
-        </div>
-        <h1 class="hero-name">Partha Pratim Saha</h1>
-        <p class="hero-role">AI Researcher &nbsp;&middot;&nbsp; Mechanistic Interpretability &nbsp;&middot;&nbsp; Geometric Deep Learning &nbsp;&middot;&nbsp; AI Safety &amp; Alignment</p>
-
-        <div class="social-row">
-          <a href="https://in.linkedin.com/in/partha121" target="_blank" rel="noopener" class="sl">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            LinkedIn
-          </a>
-          <a href="https://github.com/pps121" target="_blank" rel="noopener" class="sl">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#1e1c19"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-            GitHub
-          </a>
-          <a href="mailto:technical.partha@gmail.com" class="sl">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4f4b44" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-            Email
-          </a>
-          <a href="https://scholar.google.com/citations?user=M0nZ5pEAAAAJ&hl=en" target="_blank" rel="noopener" class="sl">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="#4285f4"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
-            Scholar
-          </a>
-          <a href="images/CV_Partha.pdf" target="_blank" class="sl">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4f4b44" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-            CV / Resume
-          </a>
-        </div>
-
-        <p class="hero-bio">
-          I build <strong>differential-geometric and information-geometric frameworks</strong>
-          to understand how LLMs encode, propagate, and transform beliefs across layers
-          &mdash; and how alignment, fine-tuning, and cultural model merging alter that
-          internal geometry.
-          Published at <strong>NeurIPS 2025</strong>, <strong>ICML 2026</strong> (Mech. Interp. Workshop), and <strong>SpringerNature ICOMP&rsquo;24</strong>.
-        </p>
-
-        <div style="display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1.1rem">
-          <span style="background:#f0fdf4;color:#166534;border:1px solid #bbf7d0;border-radius:5px;padding:.2rem .6rem;font-size:.73rem;font-weight:700;letter-spacing:.02em">★ NeurIPS 2025</span>
-          <span style="background:#fff7ed;color:#9a3412;border:1px solid #fed7aa;border-radius:5px;padding:.2rem .6rem;font-size:.73rem;font-weight:700;letter-spacing:.02em">SpringerNature</span>
-          <span style="background:var(--accent-light);color:var(--accent);border:1px solid #c5d4f8;border-radius:5px;padding:.2rem .6rem;font-size:.73rem;font-weight:700;letter-spacing:.02em">BITS Pilani · 9.08 GPA · Top 5%</span>
-          <span style="background:var(--accent-light);color:var(--accent);border:1px solid #c5d4f8;border-radius:5px;padding:.2rem .6rem;font-size:.73rem;font-weight:700;letter-spacing:.02em">NeurIPS 2025 Reviewer</span>
-          <span style="background:var(--accent-light);color:var(--accent);border:1px solid #c5d4f8;border-radius:5px;padding:.2rem .6rem;font-size:.73rem;font-weight:700;letter-spacing:.02em">AWS Scholar</span>
-          <span style="background:var(--accent-light);color:var(--accent);border:1px solid #c5d4f8;border-radius:5px;padding:.2rem .6rem;font-size:.73rem;font-weight:700;letter-spacing:.02em">BlueDot Impact</span>
-          <span style="background:var(--accent-light);color:var(--accent);border:1px solid #c5d4f8;border-radius:5px;padding:.2rem .6rem;font-size:.73rem;font-weight:700;letter-spacing:.02em">&#10022; ICML 2026 Workshop</span>
-        </div>
-                <div class="action-row">
-          <!-- TBVF paper button hidden for double-blind review — uncomment to restore
-          <a href="https://github.com/pps121/torsional-belief-vector-field/raw/main/papers/ICML2026_MechInterp_Workshop.pdf"
-             class="btn btn-primary" target="_blank">Read TBVF Paper</a>
-          <a href="https://github.com/pps121/torsional-belief-vector-field"
-             class="btn btn-outline" target="_blank">Code &amp; Data</a>
-          -->
-          <a href="#research" class="btn btn-primary">View Research</a>
-          <a href="#publications" class="btn btn-outline">All Publications</a>
-          <a href="images/CV_Partha.pdf" class="btn btn-outline" target="_blank">Download CV</a>
-        </div>
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-top">
+    <div class="header-photo">
+      <img src="images/photo_main.jpg" alt="Partha Pratim Saha"
+           onerror="this.outerHTML='<div class=\'photo-fallback\'>PPS</div>'"/>
+    </div>
+    <div class="header-info">
+      <h1>Partha Pratim Saha</h1>
+      <p class="header-role">AI Researcher &nbsp;·&nbsp; Lecturer in Computer Science &nbsp;·&nbsp; BITS Pilani M.Tech (GPA 9.08/10, Top 5%)</p>
+      <div class="contact-line">
+        <a href="mailto:technical.partha@gmail.com">technical.partha@gmail.com</a>
+        <a href="https://in.linkedin.com/in/partha121" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/pps121" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://scholar.google.com/scholar?q=Partha+Pratim+Saha" target="_blank" rel="noopener">Google Scholar</a>
       </div>
-
-      <!-- PHOTOS -->
-      <div class="photo-stack">
-        <img src="images/photo_main.jpg" alt="Partha Pratim Saha"
-             class="photo-main"
-             onerror="this.classList.add('photo-placeholder');this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'152\' height=\'152\'%3E%3C/svg%3E';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.insertAdjacentHTML('afterend','');this.outerHTML='<div class=\'photo-main photo-placeholder\' aria-label=\'Partha Pratim Saha\'>PPS</div>'"/>
-        <img src="images/photo_secondary.jpg" alt="Field work"
-             class="photo-travel"
-             onerror="this.style.display='none'"/>
-      </div>
+      <a href="images/CV_Partha.pdf" class="cv-link" target="_blank">Download CV (PDF)</a>
     </div>
   </div>
-</section>
 
-<section id="about">
-  <div class="page">
-    <div class="sec-eyebrow">01 &middot; About</div>
-    <div class="sec-title">About Me</div>
-    <div class="about-grid">
-      <div class="about-body">
-        <p>
-          I am an AI researcher and lecturer with over <strong>12 years of combined experience</strong>
-          in industry and academia
-          (BITS Pilani M.Tech &mdash; 9.08 GPA, top 5%), now focused full-time on
-          foundational research in <strong>mechanistic interpretability, AI alignment,
-          and geometric deep learning</strong>.
-        </p>
-        <p>
-          My research programme develops <strong>information-geometric frameworks</strong>
-          for tracing how LLMs encode, propagate, and transform beliefs across layers
-          &mdash; and how alignment, fine-tuning, cultural model merging, and distillation
-          alter that internal geometry. Three active research threads:
-          (1)&nbsp;<strong>AI Safety &amp; Mechanistic Interpretability</strong> via Torsional Belief
-          Vector Fields; (2)&nbsp;<strong>Cross-cultural &amp; Multilingual AI</strong> via
-          Semantic Helix / nDNA;
-          and (3)&nbsp;<strong>Privacy-Preserving Federated Learning</strong> for healthcare
-          (published <a href="https://link.springer.com/chapter/10.1007/978-3-031-72171-7_3" target="_blank">SpringerNature&nbsp;ICOMP&rsquo;24</a>).
-        </p>
-        <p>
-          My long-term vision: AI systems aligned not only behaviourally but
-          <em>geometrically</em> &mdash; with transparent, auditable internal representations
-          that can be verified, not just tested.
-          I am particularly motivated by applications where responsible, interpretable AI
-          can have measurable global impact: <strong>global health</strong>, diagnostic AI,
-          equitable NLP, and human-centred AI systems for underserved communities.
-        </p>
-        <p>
-          I currently serve as <strong>Lecturer in Computer Science</strong> at Nalhati
-          Government Polytechnic College (West Bengal, India), where I teach ML, Deep Learning,
-          IoT, and Python, and supervise 50+ students on AI/NLP research projects.
-          I have been selected as a <strong>NeurIPS 2025 Reviewer</strong>, <strong>AWS AI &amp; ML Scholar</strong>,
-          and received full scholarship to multiple premier summer schools
-          (Duke ML, Cohere, Armenian LLM, University of Chicago DSI).
-        </p>
-        <p>
-          I am deeply concerned about the risks from advanced AI systems — particularly <strong>power-seeking behaviour</strong>, <strong>concentration of control</strong>, and the failure modes that emerge when capable AI systems pursue proxy objectives misaligned with human values. These are not abstract worries: they shape every architectural choice I make in my research. My goal is not to merely <em>describe</em> alignment failures but to build the mathematical tools that let us <em>detect</em> them inside the model — before they manifest as harmful outputs.
-        </p>
-        <div class="quote-block">
-          &ldquo;AI systems must be aligned not only behaviourally but geometrically &mdash;
-          with transparent, auditable internal representations that can be verified, not just tested.&rdquo;
-        </div>
-      </div>
-
-      <div>
-        <div class="info-card">
-          <div class="info-section-title">Education</div>
-          <div class="info-item">
-            <div class="info-label">M.Tech &mdash; Data Science &amp; Engineering</div>
-            <div class="info-val"><a href="https://www.bits-pilani.ac.in/" target="_blank">BITS Pilani</a>, India</div>
-            <div class="info-val" style="font-size:.78rem;color:var(--text-muted)">GPA 9.08/10 &middot; Distinction &middot; Top 5% (2019&ndash;2021)</div>
-          </div>
-          <div class="info-item">
-            <div class="info-label">B.Tech &mdash; Computer Science &amp; Engineering</div>
-            <div class="info-val">WBUT, Kolkata, India</div>
-            <div class="info-val" style="font-size:.78rem;color:var(--text-muted)">GPA 8.49/10 &middot; Top 5% (2006&ndash;2010)</div>
-          </div>
-
-          <div class="info-section-title">Research Interests</div>
-          <div class="info-item">
-            <div class="info-val" style="font-size:.82rem;line-height:1.65">Mechanistic Interpretability &middot; Geometric ML &middot; AI Safety &amp; Alignment &middot; AI Deception Detection &middot; Misalignment Monitoring &middot; Cross-cultural LLMs &middot; Privacy-Preserving FL &middot; LLM Reasoning</div>
-          </div>
-
-          <div class="info-section-title">Current Position</div>
-          <div class="info-item">
-            <div class="info-label">Lecturer in CS</div>
-            <div class="info-val">Nalhati Govt. Polytechnic College</div>
-            <div class="info-val" style="font-size:.78rem;color:var(--text-muted)">West Bengal, India &middot; Dec 2021&ndash;Present</div>
-          </div>
-
-          <div class="info-section-title">Links</div>
-          <div class="info-item">
-            <div class="info-val"><a href="https://in.linkedin.com/in/partha121" target="_blank">LinkedIn: partha121</a></div>
-          </div>
-          <div class="info-item">
-            <div class="info-val"><a href="https://github.com/pps121" target="_blank">GitHub: pps121</a></div>
-          </div>
-          <div class="info-item">
-            <div class="info-val"><a href="mailto:technical.partha@gmail.com">technical.partha@gmail.com</a></div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <!-- OBJECTIVE -->
+  <div class="objective">
+    Prospective AI PhD applicant focusing on Natural Language Processing (NLP), AI Safety, and Large Language Model (LLM) Alignment.
   </div>
-</section>
+</header>
 
-<section id="awards" style="background:var(--off-white)">
-  <div class="page">
-    <div class="sec-eyebrow">02 &middot; Recognition</div>
-    <div class="sec-title">Awards &amp; Achievements</div>
-    <div class="awards-grid">
-      <div class="award-item" style="border-color:#fde68a;background:linear-gradient(135deg,#fffbeb,#fef9c3);grid-column:1/-1;">
-        <div class="award-icon">🏆</div>
-        <div class="award-text"><strong>MIT Hack-Nation Global AI Hackathon</strong> &mdash; Accepted to the 6th <em>Hack-Nation Global AI Hackathon</em> organised by the <strong>MIT Club of Northern California, MIT Club of Boston, and MIT Club of Germany</strong>. Excited to build and compete on real-world AI challenges alongside a global cohort &mdash; 2026.</div>
-      </div>
-      <div class="award-item" style="border-color:#a5f3fc;background:linear-gradient(135deg,#ecfeff,#e0f2fe);grid-column:1/-1;">
-        <div class="award-icon">🌟</div>
-        <div class="award-text"><strong>Emerging Leaders in AI (ELAI) Graduate Program</strong> &mdash; Selected as a participant in the <em>Emerging Leaders in AI (ELAI)</em> Graduate Program, committing 5 hours bi-weekly to advancing AI literacy, research, and leadership in the global AI community &mdash; 2026.</div>
-      </div>
-      <div class="award-item" style="border-color:#ef4444; background:linear-gradient(135deg, #fef2f2 0%, #ffe4e6 100%); grid-column:1/-1; padding: 1.5rem; box-shadow: 0 4px 15px rgba(239, 68, 68, 0.2); transform: scale(1.02); transition: transform 0.3s ease;">
-        <div class="award-icon" style="font-size: 2.5rem;">⭐</div>
-        <div class="award-text" style="font-size: 1.1rem; line-height: 1.5;">
-          <strong style="color: #991b1b; font-size: 1.25rem;">MIT AI Safety Fundamentals (AISF)</strong><br/>
-          <span style="color: #7f1d1d;">Got accepted from ~300 applicants globally for the prestigious <a href="https://aialignment.mit.edu/aisf/" target="_blank" style="color:#ef4444; text-decoration: underline; font-weight:bold;">8-week MIT AISF program</a> on AI Safety, in collaboration with the <a href="https://aisst.ai/" target="_blank" style="color:#ef4444; text-decoration: underline; font-weight:bold;">Harvard AI Safety Student Team</a>. One of a small cohort accepted globally &mdash; 2026.</span>
-        </div>
-      </div>
-      <div class="award-item" style="border-color:#fde047;background:#fefce8;grid-column:1/-1;">
-        <div class="award-icon">🤝</div>
-        <div class="award-text"><strong>Cooperative AI Foundation Course</strong> &mdash; Accepted into the prestigious Cooperative AI Course (Summer 2026) by the <a href="https://www.cooperativeai.com/foundation" target="_blank">Cooperative AI Foundation</a> to navigate the emerging field of cooperative AI, focusing on its <strong>Importance</strong> (benefiting all with advanced AI), <strong>Neglectedness</strong> (assessing counterfactual work), and <strong>Tractability</strong> (making concrete progress).</div>
-      </div>
-      <div class="award-item" style="border-color:#bbf7d0;background:#f0fdf4">
-        <div class="award-icon">🛡️</div>
-        <div class="award-text"><strong>BlueDot Impact</strong> &mdash; Completed <em>Technical AI Safety</em> (Jun 2026) and <em>AGI Strategy</em> (May 2026) courses. Rigorous training in catastrophic risk, power-seeking AI, and technical safety evaluation.</div>
-      </div>
-      <div class="award-item" style="border-color:#bbf7d0;background:#f0fdf4">
-        <div class="award-icon">🔬</div>
-        <div class="award-text"><strong>LASR Labs</strong> &mdash; Progressed through initial selection rounds of the <a href="https://www.lasrlabs.org/" target="_blank">LASR (Learning from AI Safety Research) Labs</a> programme for mechanistic interpretability research.</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🖥️</div>
-        <div class="award-text"><strong>5x Google Colab Pro A100/H100 GPU</strong> (300 units each) from <a href="https://neuromatch.io/" target="_blank">Neuromatch Academy</a> for AI Safety research</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">📋</div>
-        <div class="award-text"><strong>NeurIPS 2025 Reviewer</strong> &mdash; Selected to serve as reviewer for MTI-LLM Workshop at NeurIPS 2025</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">☁️</div>
-        <div class="award-text"><strong>AWS AI &amp; ML Scholar</strong> by Udacity, 2025</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🎓</div>
-        <div class="award-text"><strong>90% Scholarship</strong> &mdash; <a href="https://llmsummerschool.am/" target="_blank">Armenian LLM Summer School 2025</a></div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🌐</div>
-        <div class="award-text"><strong>Duke Machine Learning Summer School 2025</strong> &amp; <strong>Cohere Summer School 2025</strong> attendee</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🏆</div>
-        <div class="award-text"><strong>SPAR Demo Day 2025</strong> &mdash; Accepted for AI Safety &amp; Alignment research demonstration (Neuromatch / AI Safety cohort)</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🏙️</div>
-        <div class="award-text"><strong>University of Chicago DSI Summer School 2024</strong> &mdash; AI-Science Research Program; Eric &amp; Wendy Schmidt Postdoctoral Fellowship (Schmidt Futures)</div>
-      </div>
-      <div class="award-item" style="border-color:#ddd6fe;background:#f5f3ff">
-        <div class="award-icon">🎓</div>
-        <div class="award-text"><strong>MLx Generative AI Fellowship</strong> &mdash; Oxford ML Summer School 2024 &amp; 2025 &mdash; competitive scholarship award for generative AI research</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🌍</div>
-        <div class="award-text"><strong>Athens NLP Summer School 2024</strong> &mdash; competitive international selection for NLP &amp; large language models</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🗼</div>
-        <div class="award-text"><strong>diiP Summer School 2024, Paris</strong> &mdash; Deep Learning &amp; Interpretability in Practice; competitive selection</div>
-      </div>
-      <div class="award-item" style="border-color:#bbf7d0;background:#f0fdf4">
-        <div class="award-icon">🧠</div>
-        <div class="award-text"><strong>Neuromatch Academy &mdash; Deep Learning 2026</strong> &mdash; Accepted as Student for the intensive <a href="https://deeplearning.neuromatch.io/" target="_blank">Deep Learning</a> programme, Jul 06&ndash;24, 2026 &mdash; competitive global selection</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🧠</div>
-        <div class="award-text"><strong>Neuromatch Academy &mdash; Deep Learning</strong> &mdash; competitive global selection for the intensive summer school (previous cohort)</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🗽</div>
-        <div class="award-text"><strong>NYU AI Summer School 2022</strong> &mdash; New York University; competitive selection in AI &amp; ML</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🤖</div>
-        <div class="award-text"><strong>AI4 IMPACT Scholar 2021</strong> &mdash; AI Singapore; selected practitioner programme for applied AI impact</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">💡</div>
-        <div class="award-text"><strong>Google Developer's Program 2019</strong> &mdash; Google Developer Expert community; competitive global selection</div>
-      </div>
-      <div class="award-item">
-        <div class="award-icon">🎓</div>
-        <div class="award-text"><strong>Udacity Bertelsmann Technology Scholarship</strong> &mdash; Google-sponsored; competitive global selection in AI &amp; ML</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="publications">
-  <div class="page">
-    <div class="sec-eyebrow">03 &middot; Publications</div>
-    <div class="sec-title">Papers &amp; Publications</div>
-    <div class="pub-list">
-
-      <!-- NeurIPS 2025 Workshop — LEAD PUBLICATION -->
-      <div class="pub-item" style="border-left:3px solid #166534;padding-left:.8rem;margin-left:-.8rem">
-        <div class="pub-year">2025</div>
-        <div>
-          <span class="pub-venue-badge v-neurips">★ NeurIPS 2025 Workshop</span>
-          <div class="pub-title">Prompting Away Stereotypes? Evaluating Bias in Text-to-Image Models for Occupations</div>
-          <div class="pub-authors">Shaina Raza, Maximus Powers, <strong>Partha Pratim Saha</strong>, Elham Dolatabadi, Usman Naseem</div>
-          <div class="pub-desc">NeurIPS 2025 Workshop on Algorithmic Fairness &middot; Empirical bias audit of DALL·E, Midjourney, Stable Diffusion across occupational stereotypes</div>
-          <div class="pub-links">
-            <a href="https://arxiv.org/pdf/2509.00849" class="plink" target="_blank">arXiv</a>
-            <a href="https://doi.org/10.5281/zenodo.15126395" class="plink" target="_blank">DOI</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- SpringerNature — SECOND -->
-      <div class="pub-item">
-        <div class="pub-year">2024</div>
-        <div>
-          <span class="pub-venue-badge v-springer">SpringerNature ICOMP'24</span>
-          <div class="pub-title">Collaborative Federated Learning Cloud Based System for Privacy-Preserving Healthcare AI</div>
-          <div class="pub-authors"><strong>Partha Pratim Saha</strong></div>
-          <div class="pub-desc">First-author · Privacy-preserving federated learning system separating PHI/PII for GPT-style personalised healthcare without centralising sensitive data</div>
-          <div class="pub-links">
-            <a href="https://link.springer.com/chapter/10.1007/978-3-031-72171-7_3" class="plink" target="_blank">SpringerNature</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- SEPARATOR: Accepted / In Press -->
-      <div style="margin:1rem 0 .5rem;font-size:.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em">Accepted &middot; In Press</div>
-
-      <!-- GRAFT: ICML 2026 Accepted -->
-      <div class="pub-item" style="border-left:4px solid #ef4444; background:#fef2f2; padding:.8rem; margin-left:-.8rem; border-radius: 4px; box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);">
-        <div class="pub-year" style="color:#ef4444; font-weight:bold;">2026</div>
-        <div>
-          <span class="pub-venue-badge v-icml" style="background:#fee2e2; color:#b91c1c; font-weight:bold;">⭐ ICML 2026 &middot; Mech. Interp. Workshop &middot; Accepted ⭐</span>
-          <div class="pub-title" style="color:#991b1b; font-weight: 700; font-size: 1.1rem;">GRAFT: Geometric Representations of Alignment's Fingerprint in Transformer Belief Trajectories</div>
-          <div class="pub-authors"><strong>Partha Pratim Saha</strong></div>
-          <div class="pub-desc" style="color:#7f1d1d;">Accepted at ICML 2026 Mechanistic Interpretability Workshop. T2 torsion is 8&times; more concept-discriminative than CKA (AUC 0.89); three pre-registered hypotheses confirmed on LITMUS (20,439 prompts).</div>
-          <div class="pub-links">
-            <a href="https://openreview.net/forum?id=4YwcNzD4pa" class="plink" target="_blank" style="border-color:#fca5a5; color:#b91c1c;">OpenReview</a>
-            <a href="https://mechinterpworkshop.com/posters/" class="plink" target="_blank" style="border-color:#fca5a5; color:#b91c1c;">Workshop Posters</a>
-            <a href="https://github.com/pps121/graft-belief-geometry" class="plink" target="_blank" style="border-color:#fca5a5; color:#b91c1c;">Code</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- SEPARATOR: Under Review / In Preparation -->
-      <div style="margin:1rem 0 .5rem;font-size:.75rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em">Under Review &amp; In Preparation</div>
-
-      <!-- MENTIS -->
-      <div class="pub-item">
-        <div class="pub-year">2026</div>
-        <div>
-          <span class="pub-venue-badge v-preprint">Under Review</span>
-          <div class="pub-title">MENTIS: What Belief Changes Under Alignment? Multi-Scale Latent Torsion in Language Models</div>
-          <div class="pub-authors"><strong>Partha Pratim Saha</strong>, Samarth Raina, Mayur Parvatikar, Amit Dhanda, Vinija Jain, Aman Chadha, Amitava Das</div>
-          <div class="pub-desc">8 new torsion metrics, full LITMUS benchmark study, DPO suppression 44.4% (Cohen&rsquo;s d=0.741, p=7.7&times;10&sup1;&sup3;), entropy&ndash;torsion bridge &rho;=&minus;0.387</div>
-          <div class="pub-links">
-            <a href="https://github.com/pps121/torsional-belief-vector-field" class="plink" target="_blank">GitHub</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- SPINAL -->
-      <div class="pub-item">
-        <div class="pub-year">2025</div>
-        <div>
-          <span class="pub-venue-badge v-preprint">Preprint</span>
-          <div class="pub-title">Scaling-law and Preference Integration in Neural Alignment Layers (SPINAL)</div>
-          <div class="pub-authors">Arion Das, <strong>Partha Pratim Saha</strong>, Aman Chadha, Vinija Jain, Amitava Das</div>
-          <div class="pub-desc">Contribution: model experiments, paper writing</div>
-          <div class="pub-links">
-            <a href="https://github.com/pps121/torsional-belief-vector-field" class="plink" target="_blank">GitHub</a>
-          </div>
-        </div>
-      </div>
-
-
-
-      <!-- Sciencematch Journal -->
-      <div class="pub-item">
-        <div class="pub-year">2025</div>
-        <div>
-          <span class="pub-venue-badge v-journal">Journal Paper</span>
-          <div class="pub-title">Enhancing Human Empathy in Conversations Using Transformer-Based Models</div>
-          <div class="pub-authors">Cherishma Kumar Subhasa, Endriyas Zenagebriel, <strong>Partha Pratim Saha</strong>, Zarah Rezaei, Joseph Akinyemi</div>
-          <div class="pub-desc">Sciencematch &middot; Impact Scholar Program 2025 &middot; Top contributor; provided all technical ideas and process-pipeline</div>
-          <div class="pub-links">
-            <a href="https://doi.org/10.5281/zenodo.15126395" class="plink" target="_blank">DOI: 10.5281/ZENODO.15126395</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- SpringerNature ICOMP -->
-      <div class="pub-item">
-        <div class="pub-year">2024</div>
-        <div>
-          <span class="pub-venue-badge v-springer">SpringerNature</span>
-          <div class="pub-title">Collaborative Federated Learning Cloud Based System</div>
-          <div class="pub-authors"><strong>Partha Pratim Saha</strong>, Naresh K. Sehgal, Miad Faezipour</div>
-          <div class="pub-desc">International Conference on Internet Computing &amp; IoT (ICOMP&rsquo;24) &middot; Computer Engineering &amp; Applied Computing (CSCE), USA</div>
-          <div class="pub-links">
-            <a href="https://link.springer.com/chapter/10.1007/978-3-031-72171-7_3" class="plink" target="_blank">SpringerNature</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
+<!-- RESEARCH INTERESTS -->
 <section id="research">
-  <div class="page">
-    <div class="sec-eyebrow">04 &middot; Research</div>
-    <div class="sec-title">Research Projects</div>
+  <h2>Research Interests</h2>
+  <p class="interests">
+    AI Safety &amp; Alignment &nbsp;·&nbsp;
+    Natural Language Processing (NLP) &nbsp;·&nbsp;
+    Mechanistic Interpretability &nbsp;·&nbsp;
+    Large Language Models (LLMs) &nbsp;·&nbsp;
+    Geometric Deep Learning &nbsp;·&nbsp;
+    Explainable &amp; Trustworthy AI &nbsp;·&nbsp;
+    AI Deception Detection &nbsp;·&nbsp;
+    Cross-cultural &amp; Multilingual AI &nbsp;·&nbsp;
+    Privacy-Preserving Federated Learning &nbsp;·&nbsp;
+    Healthcare NLP
+  </p>
 
-    <!-- AI SAFETY RESEARCH: Path to Impact -->
-    <div class="research-card" style="border-color:#bbf7d0;background:linear-gradient(135deg,#f0fdf4,#fff)">
-      <div class="rc-header">
-        <div class="rc-title">AI Safety Research Programme</div>
-        <span class="rc-badge" style="background:#dcfce7;color:#166534;border-color:#86efac">Core Research Focus</span>
-      </div>
-      <p class="rc-body">
-        My core concern is straightforward but urgent: as AI systems grow more capable, misalignment between
-        their internal objectives and human values becomes catastrophically consequential — not merely
-        inconvenient. I am particularly worried about <strong>power-seeking behaviour</strong> in
-        strategically capable agents, <strong>concentration of control</strong> in military and governance domains,
-        and the fundamental challenge that <em>behavioural safety does not imply geometric safety</em>.
-        A model can pass all safety evaluations while encoding deeply misaligned belief structures internally.
-      </p>
-      <div class="highlight-box">
-        Geometric Torsion Framework &mdash; measuring alignment not as behaviour but as geometry:<br/>
-        Torsion norm <span class="hl">T1_ℓ = &Vert;S_ℓ&Vert;<sub>F</sub></span>
-        &nbsp;&middot;&nbsp; H1 amplification <span class="hl">1500&times;</span> for normative concepts
-        &nbsp;&middot;&nbsp; Thermodynamic gap <span class="hl">10&times;</span>
-        (normative vs factual) &nbsp;&middot;&nbsp; Entropy&ndash;torsion bridge
-        <span class="hl">&rho; = &minus;0.387</span> (Mistral, p=5.43&times;10<sup>&minus;30</sup>)
-      </div>
+  <hr/>
 
-      <div class="metric-row">
-        <div class="mbox"><span class="mnum">8</span><div class="mlabel">Geometric torsion metrics (8-scale)</div></div>
-        <div class="mbox"><span class="mnum">3&times;2</span><div class="mlabel">IT/PA model pairs tested</div></div>
-        <div class="mbox"><span class="mnum">20,439</span><div class="mlabel">LITMUS benchmark prompts</div></div>
-      </div>
-      <div class="tag-row">
-        <span class="tag" style="background:#dcfce7;color:#166534;border-color:#86efac">BlueDot Impact — AGI Strategy</span>
-        <span class="tag" style="background:#dcfce7;color:#166534;border-color:#86efac">BlueDot Impact — Technical AI Safety</span>
-        <span class="tag">Mechanistic Interpretability</span><span class="tag">Geometric Alignment</span>
-        <span class="tag">Power-seeking Analysis</span><span class="tag">Catastrophic Risk</span>
-      </div>
-    </div>
+  <h3>Core Research: Belief Vector Field &amp; Geometric Alignment</h3>
+  <p style="font-family:'Inter',sans-serif;font-size:.88rem;color:#333;margin:.5rem 0 .8rem;line-height:1.7">
+    My primary research develops <em>information-geometric frameworks</em> to measure how LLMs encode, propagate, and transform beliefs across transformer layers — and how alignment (DPO/RLHF), fine-tuning, and cultural merging alter that internal geometry.
+    Core finding: <strong>torsional geometry provides the most statistically significant separation (highest Cohen's d effect size) between safe and harmful prompts</strong> across SFT &amp; DPO model variants.
+  </p>
+  <p style="font-family:'JetBrains Mono',monospace;font-size:.78rem;color:#444;background:#f8f8f8;padding:.6rem .8rem;border-left:3px solid #999;line-height:1.9">
+    Models: LLaMA-3.2, OLMo-7B, Gemma-2, Mistral-7B, Zephyr-7B, Qwen3 &nbsp;|&nbsp;
+    Datasets: LITMUS, HarmfulQA, hh-rlhf &nbsp;|&nbsp;
+    Metrics: 17 geometric metrics (torsion, spectral curvature, thermodynamic length, DTW)
+  </p>
 
-    <!-- TBVF: visible now - research is mature enough to show generically -->
-    <div class="research-card">
-      <div class="rc-header">
-        <div class="rc-title">Torsional Belief Vector Fields (TBVF) &mdash; AI Safety &amp; Mechanistic Interpretability</div>
-      </div>
-      <p class="rc-body">
-        Models transformer hidden-state trajectories as discrete curves on a Riemannian belief manifold
-        (&Mscr;, g<sub>F</sub>) with the Fisher-Rao metric. The torsion tensor
-        <strong>S<sub>&ell;</sub> = (M<sub>&ell;</sub> &minus; M<sub>&ell;</sub><sup>T</sup>) / 2</strong>
-        captures rotational mismatch between consecutive belief updates &mdash; a non-commutative geometric
-        signature invisible to attention patterns or activation magnitudes.
-        Key discovery: DPO alignment creates geometrically localised <strong>&ldquo;brake layers&rdquo;</strong>
-        that systematically suppress torsion, probed across OLMo-7B, Mistral-7B, and Zephyr-7B using
-        500 unsafe prompts (Litmus) and 17 geometric metrics.
-      </p>
-      <div class="highlight-box">
-        <span class="hl-g">Peak result</span> &mdash; Layer 27, Mistral-7B (Bonferroni-corrected, n=500):<br/>
-        DPO torsion suppression: <span class="hl">44.4%</span> &nbsp;|&nbsp;
-        Cohen&rsquo;s d = <span class="hl">0.741</span> &nbsp;|&nbsp;
-        p = <span class="hl">7.7 &times; 10&sup1;&sup3;</span><br/>
-        DTW&ndash;Torsion theorem: DC(w) &ge; <span class="hl">0.875</span> &middot; |&Sigma;||S<sup>IT</sup>||<sub>F</sub> &minus; &Sigma;||S<sup>PA</sup>||<sub>F</sub>|
-      </div>
-      <div class="metric-row">
-        <div class="mbox"><span class="mnum">17</span><div class="mlabel">Geometric metrics developed</div></div>
-        <div class="mbox"><span class="mnum">3&times;2</span><div class="mlabel">SFT/DPO model pairs</div></div>
-        <div class="mbox"><span class="mnum">500</span><div class="mlabel">Unsafe prompts (Litmus)</div></div>
-        <div class="mbox"><span class="mnum">20</span><div class="mlabel">Concepts (DTW analysis)</div></div>
-        <div class="mbox"><span class="mnum">31</span><div class="mlabel">Layer-level t-tests</div></div>
-        <div class="mbox"><span class="mnum">16pp</span><div class="mlabel">Full paper + appendix</div></div>
-      </div>
-      <div class="tag-row">
-        <span class="tag">Torsion Tensor</span><span class="tag">Fisher-Rao Metric</span><span class="tag">Frenet-Serret</span>
-        <span class="tag">Holonomy Defect</span><span class="tag">Spectral Torsion</span><span class="tag">DTW</span>
-        <span class="tag">DPO</span><span class="tag">OLMo-7B</span><span class="tag">Mistral-7B</span><span class="tag">Zephyr-7B</span>
-      </div>
-    </div>
-    -->
+  <hr/>
 
-    <!-- nDNA -->
-    <div class="research-card">
-      <div class="rc-header">
-        <div class="rc-title">Semantic Helix of LLMs (nDNA) &mdash; Cross-cultural &amp; Multilingual AI</div>
-        <span class="rc-badge">Active</span>
-      </div>
-      <p class="rc-body">
-        Unifies fine-tuning, alignment, distillation, and merging as measurable deformations of the
-        same depth-wise semantic flow via spectral curvature &kappa;<sub>&ell;</sub> and thermodynamic
-        length &Lscr;<sub>&ell;</sub> (epistemic effort across layers). Investigates epistemic inheritance
-        in merged LLMs using Fisher-Rao geometry, producing <strong>neural offspring</strong>;
-        emergent cultural nDNA measured via spectral curvature deviation &Delta;&kappa;<sub>&ell;</sub>
-        and thermodynamic length divergence &Delta;&Lscr;<sub>&ell;</sub>.
-        Cultures studied: African, Latin American, South Asian, East Asian, Arabic, Indigenous,
-        European, Pacific Islander.
-      </p>
-      <div class="tag-row">
-        <span class="tag">Spectral Curvature</span><span class="tag">Thermodynamic Length</span>
-        <span class="tag">Model Merging</span><span class="tag">Cultural AI</span>
-        <span class="tag">Llama3-instruct</span><span class="tag">DeepSeek-R1</span><span class="tag">Qwen</span>
-      </div>
-    </div>
-
-    <!-- Federated Learning -->
-    <div class="research-card">
-      <div class="rc-header">
-        <div class="rc-title">Privacy-Preserving Federated Learning for Healthcare (CFL)</div>
-        <span class="rc-badge">Published &middot; SpringerNature ICOMP&rsquo;24</span>
-      </div>
-      <p class="rc-body">
-        Collaborative Federated Learning (CFL) cloud-based system separates datasets into public and
-        private sets based on the removal of PHI/PII, enabling personalised GPT-like systems without
-        centralising sensitive data. Enables AI for healthcare at scale while preserving patient privacy
-        &mdash; a critical requirement for responsible, equitable AI deployment globally.
-      </p>
-      <div class="tag-row">
-        <span class="tag">Federated Learning</span><span class="tag">Privacy-Preserving AI</span>
-        <span class="tag">Healthcare AI</span><span class="tag">PHI/PII Separation</span><span class="tag">SpringerNature</span>
-      </div>
-    </div>
-
-    <!-- Robustness -->
-    <div class="research-card" style="border-style:solid">
-      <div class="rc-header">
-        <div class="rc-title">Neural Robustness Learning in Dense Transformers (Preliminary)</div>
-        <span class="rc-badge" style="background:var(--off-white);color:var(--text-muted);border-color:var(--border)">In Progress</span>
-      </div>
-      <p class="rc-body">
-        Investigates whether formal robustness certificates for LLMs can be derived from data
-        contamination, label noise, and adversarial attacks rather than input-perturbation bounds.
-        DPO-aligned models show compressed Fisher-norm spectra versus SFT counterparts, suggesting
-        alignment induces geometric contraction doubling as a robustness mechanism.
-        Framework: Lipschitz robustness bounds guaranteeing up to <strong>40% data contamination
-        holds almost natural robustness</strong>. Models: ViT, MedSigLIP, CLIP.
-      </p>
-      <div class="tag-row">
-        <span class="tag">Robustness Certificates</span><span class="tag">Fisher-norm Spectra</span>
-        <span class="tag">ViT</span><span class="tag">MedSigLIP</span><span class="tag">CLIP</span>
-      </div>
-    </div>
-  </div>
+  <h3>Semantic Helix of LLMs (nDNA) — Cross-cultural &amp; Multilingual AI</h3>
+  <p style="font-family:'Inter',sans-serif;font-size:.88rem;color:#333;margin:.5rem 0;line-height:1.7">
+    Unifies fine-tuning, alignment, distillation, and model merging as measurable deformations of the same depth-wise semantic flow via spectral curvature κ<sub>ℓ</sub> and thermodynamic length ℒ<sub>ℓ</sub>. Investigates epistemic inheritance in merged LLMs — emergent cultural &ldquo;neural DNA&rdquo; across African, Latin American, South Asian, East Asian, Arabic, European, and Pacific Islander cultures.
+  </p>
 </section>
-
-<section id="expertise">
-  <div class="page">
-    <div class="sec-eyebrow">05 &middot; Skills &amp; Expertise</div>
-    <div class="sec-title">Technical Expertise</div>
-    <div class="expertise-grid">
-      <div class="exp-card">
-        <div class="exp-card-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b52cc" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          NLP &amp; Foundation Models
-        </div>
-        <div class="exp-tags">
-          <span class="etag">LLM Alignment &amp; Safety</span><span class="etag">Mechanistic Interpretability</span>
-          <span class="etag">AI Deception Detection</span><span class="etag">Misalignment Monitoring</span>
-          <span class="etag">Belief &amp; Knowledge Editing</span><span class="etag">AI Agents</span>
-          <span class="etag">XAI / Explainable AI</span><span class="etag">Fine-tuning (HuggingFace)</span>
-          <span class="etag">Hybrid &amp; Multi-hop RAG</span><span class="etag">Conversational AI</span>
-
-        </div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-card-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b52cc" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          Deep Learning &amp; ML
-        </div>
-        <div class="exp-tags">
-          <span class="etag">PyTorch</span><span class="etag">TensorFlow / Keras</span>
-          <span class="etag">Transformers (GPT, Llama, Mistral, Qwen, Gemma, DeepSeek)</span>
-          <span class="etag">CNN, RNN, Autoregressive Models</span>
-          <span class="etag">Regression / Classification / Clustering</span>
-          <span class="etag">Federated Learning</span>
-        </div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-card-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b52cc" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          Geometric &amp; Mathematical ML
-        </div>
-        <div class="exp-tags">
-          <span class="etag">Riemannian Geometry</span><span class="etag">Fisher-Rao Metric</span>
-          <span class="etag">Cartan Torsion</span><span class="etag">Persistent Homology</span>
-          <span class="etag">Information Geometry</span><span class="etag">DTW Analysis</span>
-          <span class="etag">Spectral Methods</span><span class="etag">Frenet-Serret Framework</span>
-        </div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-card-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b52cc" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          Frameworks &amp; Tools
-        </div>
-        <div class="exp-tags">
-          <span class="etag">Python</span><span class="etag">LangChain</span><span class="etag">LlamaIndex</span>
-          <span class="etag">Scikit-learn</span><span class="etag">Numpy / Pandas / NLTK / SpaCy</span>
-          <span class="etag">Docker / Kubernetes</span><span class="etag">Azure / AWS / IBM Cloud</span>
-          <span class="etag">PostgreSQL / MySQL</span>
-        </div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-card-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b52cc" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 10.5 19.79 19.79 0 0 1 1.58 2.18 2 2 0 0 1 3.55 0h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 7.5a16 16 0 0 0 6 6l.86-.86a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 14.92z"/></svg>
-          Domain Knowledge
-        </div>
-        <div class="exp-tags">
-          <span class="etag">AI Safety &amp; Responsible AI</span><span class="etag">Global Health AI</span>
-          <span class="etag">Cancer Genomics &amp; Bioinformatics</span><span class="etag">Healthcare NLP</span>
-          <span class="etag">Education Technology</span><span class="etag">Finance &amp; Banking</span>
-          <span class="etag">Cross-cultural &amp; Multilingual AI</span>
-        </div>
-      </div>
-      <div class="exp-card">
-        <div class="exp-card-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2b52cc" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Research &amp; Communication
-        </div>
-        <div class="exp-tags">
-          <span class="etag">NeurIPS / ICML / SpringerNature Publication</span>
-          <span class="etag">Academic Mentorship (50+ students)</span>
-          <span class="etag">Workshop &amp; Seminar Facilitation</span>
-          <span class="etag">LaTeX &amp; Technical Writing</span>
-          <span class="etag">Cross-functional Team Leadership</span>
-        </div>
-      </div>
-      <div class="exp-card" style="grid-column:1/-1;border-color:#bbf7d0;background:#f0fdf4">
-        <div class="exp-card-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span style="color:#166534">Technical AI Safety</span>
-        </div>
-        <div class="exp-tags">
-          <span class="etag" style="background:#dcfce7;border-color:#86efac;color:#166534">BlueDot Impact — AGI Strategy</span>
-          <span class="etag" style="background:#dcfce7;border-color:#86efac;color:#166534">BlueDot Impact — Technical AI Safety</span>
-          <span class="etag">Power-seeking &amp; Goal Misgeneralisation</span>
-          <span class="etag">Mechanistic Interpretability (Circuits)</span>
-          <span class="etag">Geometric Alignment Probing</span>
-          <span class="etag">RLHF / DPO Safety Analysis</span>
-          <span class="etag">Catastrophic Risk Evaluation</span>
-          <span class="etag">Representation Engineering</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="experience">
-  <div class="page">
-    <div class="sec-eyebrow">06 &middot; Experience</div>
-    <div class="sec-title">Work Experience</div>
-    <div class="exp-list">
-
-      <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div>
-          <div class="exp-role">Teaching Assistant (M.Tech Programme)</div>
-          <div class="exp-org">BITS Pilani, India</div>
-          <div class="exp-period">2021 &ndash; 2023</div>
-          <div class="exp-desc">Teaching Assistant for three graduate courses: <strong>NLP Applications</strong> [Winter 2023], <strong>Deep Learning</strong> [Fall 2021], and <strong>Deep Reinforcement Learning</strong> [Spring 2021]. Conducted tutorials, graded assignments, and mentored students. Honorarium: USD $2,513.11 across all three courses.</div>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div>
-          <div class="exp-role">Lecturer in Computer Science</div>
-          <div class="exp-org">WBSCTED &mdash; Nalhati Government Polytechnic College, West Bengal, India</div>
-          <div class="exp-period">Dec 2021 &ndash; Present</div>
-          <div class="exp-desc">Teaching ML, Deep Learning, IoT, Python, and Java. Project supervisor for 50+ final-year students in AI, NLP, Agentic AI, and Empathetic Chatbot development. Head of Department (CS) responsibilities. Four active research projects on AI Safety, nDNA/Semantic Helix, Cultural LLMs, and Neural Robustness.</div>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div>
-          <div class="exp-role">Lead Data Scientist &mdash; Conversational Dialog System</div>
-          <div class="exp-org">Wipro Limited, Bangalore, India</div>
-          <div class="exp-period">Sept 2021 &ndash; Nov 2021</div>
-          <div class="exp-desc">Developed a conversational chatbot system removing query ambiguities. Led a team of 5; implemented 50+ custom intents and dialog flows with IBM Watson. Impact: 0.3 million users worldwide.</div>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div>
-          <div class="exp-role">Senior Data Scientist &mdash; Medical Search Engine (J&amp;J R&amp;D)</div>
-          <div class="exp-org">BirlaSoft &middot; Johnson &amp; Johnson R&amp;D, New Delhi, India</div>
-          <div class="exp-period">Dec 2017 &ndash; Aug 2019</div>
-          <div class="exp-desc">Built medical search engine using SciBERT and SpaCy NLP pipeline. Impact: over 0.1 million J&amp;J product users. Tools: Python, Word2Vec, SciSpacy, Fuzzy Search, Flask.</div>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div>
-          <div class="exp-role">Project Engineer &mdash; Threat Intelligence System</div>
-          <div class="exp-org">Indian Institute of Technology (IIT) Kanpur, India</div>
-          <div class="exp-period">Nov 2016 &ndash; Jul 2017</div>
-          <div class="exp-desc">Developed secure threat management system for academic institutions. Researched cyber-security measures against integrity, confidentiality, and non-repudiation attacks. Tools: Python, Drupal, Django.</div>
-        </div>
-      </div>
-
-      <div class="exp-item">
-        <div class="exp-dot"></div>
-        <div>
-          <div class="exp-role">Senior Systems Engineer &mdash; Alignment &amp; Cancer Genomics in AI</div>
-          <div class="exp-org">Infosys Technologies Limited, Chennai, India</div>
-          <div class="exp-period">Jan 2011 &ndash; Jul 2015</div>
-          <div class="exp-desc">Applied Edit Distance and Needleman-Wunsch algorithms on DNA sequences (FASTQ) to identify minimum insertions/deletions. Identified top 10 genes driving Multiple Myeloma blood cancer; implemented 3 research papers. Impact: biological hierarchy determination for new species, drug design, life expectancy improvements. Tools: Python, Word2Vec, Numpy, Pandas, Dynamic Programming.</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="page">
-    <div class="sec-eyebrow">07 &middot; Contact</div>
-    <div class="sec-title">Get in Touch</div>
-    <div class="contact-grid">
-      <div class="contact-text">
-        <p style="font-size: 1.1rem; padding: 1rem; background: #fff0f0; border-left: 4px solid #ef4444; border-radius: 4px; color: #7f1d1d;">
-          ⭐ I am actively seeking <strong>fully-funded PhD positions</strong> starting in 2026 at research universities with strong programmes in <strong>AI safety, AI alignment, mechanistic interpretability, and related areas</strong> for global impact.
-        </p>
-        <p>
-          I am also open to <strong>research fellowships, collaborations</strong>, and discussions
-          with faculty and research scientists working on interpretable, responsible AI &mdash;
-          particularly in applications relevant to global health, education, or equitable systems.
-        </p>
-        <p style="font-size:.86rem;color:var(--text-muted)">
-          If you are a professor, research scientist, or program director interested in my work,
-          please reach out directly. I respond within 24 hours.
-        </p>
-      </div>
-      <div class="contact-links">
-        <a href="mailto:technical.partha@gmail.com" class="cl">
-          <span class="cl-ico">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f4b44" stroke-width="1.8"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-          </span>
-          <div><div class="cl-label">Email</div><div class="cl-sub">technical.partha@gmail.com</div></div>
-        </a>
-        <a href="https://in.linkedin.com/in/partha121" target="_blank" rel="noopener" class="cl">
-          <span class="cl-ico">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </span>
-          <div><div class="cl-label">LinkedIn</div><div class="cl-sub">linkedin.com/in/partha121</div></div>
-        </a>
-        <a href="https://github.com/pps121" target="_blank" rel="noopener" class="cl">
-          <span class="cl-ico">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1e1c19"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-          </span>
-          <div><div class="cl-label">GitHub</div><div class="cl-sub">github.com/pps121</div></div>
-        </a>
-        <a href="https://scholar.google.com/citations?user=M0nZ5pEAAAAJ&hl=en" target="_blank" rel="noopener" class="cl">
-          <span class="cl-ico">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#4285f4"><path d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"/></svg>
-          </span>
-          <div><div class="cl-label">Google Scholar</div><div class="cl-sub">Academic publications</div></div>
-        </a>
-        <a href="images/CV_Partha.pdf" target="_blank" class="cl">
-          <span class="cl-ico">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4f4b44" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-          </span>
-          <div><div class="cl-label">Curriculum Vitae</div><div class="cl-sub">Download PDF</div></div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GITHUB STATS -->
-
-
-<!-- ABOUT -->
-
-
-<!-- EXPERTISE -->
-
-
-<!-- RESEARCH -->
-
 
 <!-- PUBLICATIONS -->
+<section id="publications">
+  <h2>Publications</h2>
+  <ol class="pub-list" reversed>
 
+    <li class="pub-item">
+      <div>
+        <span class="pub-badge badge-preprint">Preprint</span>
+      </div>
+      <div class="pub-title">MENTIS: What Belief Changes Under Alignment? Measuring Multi-Scale Latent Torsion Across Four Language Models</div>
+      <div class="pub-authors"><strong>Partha Pratim Saha</strong>, Samarth Raina, Mayur Parvatikar, Amit Dhanda, Vinija Jain, Aman Chadha, Amitava Das</div>
+      <div class="pub-venue">Under Review &nbsp;·&nbsp; 8 new torsion metrics, full LITMUS benchmark, DPO suppression 44.4% (Cohen's d=0.741, p=7.7×10⁻¹³), entropy–torsion bridge ρ=−0.387</div>
+      <div class="pub-links">
+        <a href="https://arxiv.org/pdf/2606.01060" target="_blank">arXiv</a>
+        <a href="https://github.com/pps121/torsional-belief-vector-field" target="_blank">GitHub</a>
+      </div>
+      <div class="pub-contrib">Contribution: Conceived idea; ran all experiments, plots, coding, and paper writing.</div>
+    </li>
+
+    <li class="pub-item">
+      <div>
+        <span class="pub-badge badge-icml">ICML 2026</span>
+      </div>
+      <div class="pub-title">GRAFT: Geometric Representations of Alignment's Fingerprint in Transformer Belief Trajectories</div>
+      <div class="pub-authors"><strong>Partha Pratim Saha</strong></div>
+      <div class="pub-venue">ICML 2026 Workshop on Mechanistic Interpretability &nbsp;·&nbsp; Poster &nbsp;·&nbsp; T2 torsion 8× more concept-discriminative than CKA (AUC 0.89); 3 pre-registered hypotheses confirmed on LITMUS (20,439 prompts)</div>
+      <div class="pub-links">
+        <a href="https://openreview.net/forum?id=4YwcNzD4pa" target="_blank">OpenReview</a>
+        <a href="https://mechinterpworkshop.com/posters/" target="_blank">Workshop Posters</a>
+        <a href="https://github.com/pps121/graft-belief-geometry" target="_blank">GitHub</a>
+      </div>
+      <div class="pub-contrib">Contribution: Sole author — idea, experiments, plots, coding, paper writing.</div>
+    </li>
+
+    <li class="pub-item">
+      <div>
+        <span class="pub-badge badge-preprint">Preprint</span>
+      </div>
+      <div class="pub-title">SPINAL: Scaling-law and Preference Integration in Neural Alignment Layers</div>
+      <div class="pub-authors">Arion Das, <strong>Partha Pratim Saha</strong>, Aman Chadha, Vinija Jain, Amitava Das</div>
+      <div class="pub-links">
+        <a href="https://arxiv.org/pdf/2601.06238" target="_blank">arXiv</a>
+      </div>
+      <div class="pub-contrib">Contribution: Model experiments and paper writing.</div>
+    </li>
+
+    <li class="pub-item">
+      <div>
+        <span class="pub-badge badge-neurips">NeurIPS 2025</span>
+      </div>
+      <div class="pub-title">Prompting Away Stereotypes? Evaluating Bias in Text-to-Image Models for Occupations</div>
+      <div class="pub-authors">Shaina Raza, Maximus Powers, <strong>Partha Pratim Saha</strong>, Mahveen Raza, Rizwan Qureshi</div>
+      <div class="pub-venue">NeurIPS 2025 Workshop on Algorithmic Fairness &nbsp;·&nbsp; Empirical bias audit of DALL·E, Midjourney, Stable Diffusion</div>
+      <div class="pub-links">
+        <a href="https://arxiv.org/pdf/2509.00849" target="_blank">arXiv</a>
+      </div>
+      <div class="pub-contrib">Contribution: End-to-end pipeline design, full dataset annotation, paper writing.</div>
+    </li>
+
+    <li class="pub-item">
+      <div>
+        <span class="pub-badge badge-journal">Journal</span>
+      </div>
+      <div class="pub-title">Enhancing Human Empathy in Conversations Using Transformer-Based Models</div>
+      <div class="pub-authors">Cherishma Kumar Subhasa, Endriyas Zenagebriel, <strong>Partha Pratim Saha</strong>, Zarah Rezaei, Joseph Akinyemi</div>
+      <div class="pub-venue">Sciencematch &nbsp;·&nbsp; Impact Scholar Program 2025 &nbsp;·&nbsp; DOI: 10.5281/ZENODO.15126395</div>
+      <div class="pub-links">
+        <a href="https://zenodo.org/records/15126395" target="_blank">DOI: 10.5281/ZENODO.15126395</a>
+      </div>
+      <div class="pub-contrib">Contribution: Top contributor — all technical ideas and process-pipeline.</div>
+    </li>
+
+    <li class="pub-item">
+      <div>
+        <span class="pub-badge badge-springer">SpringerNature</span>
+      </div>
+      <div class="pub-title">Collaborative Federated Learning Cloud Based System</div>
+      <div class="pub-authors"><strong>Partha Pratim Saha</strong>, Naresh K. Sehgal, Miad Faezipour</div>
+      <div class="pub-venue">ICOMP'24 &nbsp;·&nbsp; Computer Engineering &amp; Applied Computing (CSCE), USA &nbsp;·&nbsp; SpringerNature</div>
+      <div class="pub-links">
+        <a href="https://link.springer.com/chapter/10.1007/978-3-031-85923-6_2" target="_blank">SpringerNature</a>
+      </div>
+    </li>
+
+  </ol>
+</section>
+
+<!-- AWARDS & ACHIEVEMENTS -->
+<section id="awards">
+  <h2>Awards &amp; Achievements</h2>
+  <ul class="award-list">
+
+    <li class="award-item">
+      <span class="award-star">★</span>
+      <span><strong>Black in AI — Emerging Leaders in AI (ELAI) 2026/27</strong> — Selected from over 534 applicants for this competitive graduate preparation programme focusing on PhD application readiness and advancing research careers in AI.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-star">★</span>
+      <span><strong>MIT Hack-Nation Global AI Hackathon (2026)</strong> — Accepted to the 6th Hack-Nation Global AI Hackathon organised by the MIT Club of Northern California, MIT Club of Boston, and MIT Club of Germany.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-star">★</span>
+      <span><strong>MIT AI Safety Fundamentals (AISF) Program (2026)</strong> — Selected from ~300 global applicants for the <a href="https://aialignment.mit.edu/aisf/" target="_blank">8-week MIT AISF expert-guided program</a> in collaboration with <a href="https://aisst.ai/" target="_blank">Harvard AI Safety Student Team (AISST)</a>.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-star">★</span>
+      <span><strong>Cooperative AI Foundation Course (Summer 2026)</strong> — Accepted by the <a href="https://www.cooperativeai.com/foundation" target="_blank">Cooperative AI Foundation</a> to navigate cooperative AI research via Importance, Neglectedness, and Tractability.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-star">★</span>
+      <span><strong>BlueDot Impact — AGI Strategy &amp; Technical AI Safety (2026)</strong> — Completed both courses; rigorous training in catastrophic risk, power-seeking AI, and technical safety evaluation.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2025–26</span>
+      <span><strong>SPAR Demo Day (2025 &amp; 2026)</strong> — AI Safety &amp; Alignment research demonstration (Neuromatch / AI Safety cohort).</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2025</span>
+      <span><strong>NeurIPS 2025 Reviewer</strong> — Selected to serve as reviewer for the MTI-LLM Workshop.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2025</span>
+      <span><strong>5× Google Colab Pro A100/H100 GPU (300 units each)</strong> awarded by Neuromatch Academy for AI Safety research.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2025</span>
+      <span><strong>AWS AI &amp; ML Scholar</strong> by Udacity (2025).</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2025</span>
+      <span><strong>90% Scholarship — Armenian LLM Summer School 2025</strong>; attended Duke ML Summer School 2025, Cohere Summer School 2025, IIIT Hyderabad Summer School.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2026</span>
+      <span><strong>Neuromatch Academy — Deep Learning 2026</strong> (Jul 6–24, 2026) — competitive global selection as student for the intensive programme.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2024–25</span>
+      <span><strong>MLx Generative AI Scholarship Grant (2024 &amp; 2025)</strong> — Oxford ML Summer School.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2024</span>
+      <span><strong>University of Chicago DSI Summer School 2024</strong> — AI-Science Research Program; Eric &amp; Wendy Schmidt Postdoctoral Fellowship (Schmidt Futures).</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2024</span>
+      <span><strong>Athens NLP Summer School 2024</strong>; <strong>diiP Summer School, Paris 2024</strong> — Deep Learning &amp; Interpretability in Practice.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2022</span>
+      <span><strong>NYU AI Summer School 2022</strong> — New York University; competitive selection.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2022</span>
+      <span><strong>Distinction — BITS Pilani M.Tech</strong> (GPA 9.08/10, Top 5% out of 600).</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2021</span>
+      <span><strong>AI4 IMPACT Scholar</strong> — AI Singapore Summer School 2021; <strong>Udacity Bertelsmann Technology Scholarship</strong> by Google.</span>
+    </li>
+
+    <li class="award-item">
+      <span class="award-year">2019</span>
+      <span><strong>Google Developer's Program, Google India 2019</strong> — competitive global selection.</span>
+    </li>
+
+  </ul>
+</section>
 
 <!-- EXPERIENCE -->
+<section id="experience">
+  <h2>Research &amp; Work Experience</h2>
 
+  <div class="exp-entry">
+    <div class="exp-header">
+      <span class="exp-role">Lecturer in CS &amp; Head of Department</span>
+      <span class="exp-period">Dec 2021 – Present</span>
+    </div>
+    <div class="exp-org">Nalhati Government Polytechnic College (Govt. of West Bengal), India</div>
+    <div class="exp-desc">
+      Teaching ML, Deep Learning, IoT, Python, and Java. Project supervisor for 50+ final-year students on AI, NLP, Agentic AI, and Empathetic Chatbot projects. Administrative HoD responsibilities. Active research on AI Safety &amp; Alignment (GRAFT/MENTIS), Semantic Helix of LLMs (nDNA), Cultural LLMs, and Neural Robustness.
+    </div>
+  </div>
 
-<!-- AWARDS -->
+  <div class="exp-entry">
+    <div class="exp-header">
+      <span class="exp-role">Lead Data Scientist — Conversational Dialog System</span>
+      <span class="exp-period">May 2021 – Nov 2021</span>
+    </div>
+    <div class="exp-org">Wipro Limited &amp; IBM Research (Joint Project), Bangalore, India</div>
+    <div class="exp-desc">
+      Led a team of 5 to build a conversational chatbot removing query ambiguities. Implemented 50+ custom intents, entities, and dialog flows with IBM Watson. <em>Impact: 0.3 million users worldwide.</em> Tools: DialogFlow, IBM Cloud, NodeJS.
+    </div>
+  </div>
 
+  <div class="exp-entry">
+    <div class="exp-header">
+      <span class="exp-role">Senior Data Scientist — Medical Search Engine (J&amp;J R&amp;D)</span>
+      <span class="exp-period">Dec 2017 – Aug 2019</span>
+    </div>
+    <div class="exp-org">BirlaSoft · Johnson &amp; Johnson R&amp;D, New Delhi, India</div>
+    <div class="exp-desc">
+      Built medical search engine using SciBERT and SciSpacy NLP pipeline for healthcare queries. <em>Impact: 0.1 million+ J&amp;J product users.</em> Tools: Python, Word2Vec, SciSpacy, Fuzzy Search, Flask.
+    </div>
+  </div>
+
+  <div class="exp-entry">
+    <div class="exp-header">
+      <span class="exp-role">Project Engineer — Threat Intelligence System</span>
+      <span class="exp-period">Nov 2016 – Jul 2017</span>
+    </div>
+    <div class="exp-org">Indian Institute of Technology (IIT) Kanpur, Computer Science Dept., India</div>
+    <div class="exp-desc">
+      Developed a secure threat management system for academic institutions. Researched cyber-security defences against integrity, confidentiality, and non-repudiation attacks. Tools: Python, Drupal, Django.
+    </div>
+  </div>
+
+  <div class="exp-entry">
+    <div class="exp-header">
+      <span class="exp-role">Senior Systems Engineer — Alignment &amp; Cancer Genomics in AI</span>
+      <span class="exp-period">Jan 2011 – Jul 2015</span>
+    </div>
+    <div class="exp-org">Infosys Technologies Limited, Chennai, India</div>
+    <div class="exp-desc">
+      Applied Edit Distance and Needleman-Wunsch algorithms on DNA sequences (FASTQ) to identify gene insertions/deletions. Identified top 10 genes driving Multiple Myeloma blood cancer; implemented 3 research papers. <em>Impact: biological hierarchy determination, drug design, life expectancy improvement.</em>
+    </div>
+  </div>
+
+  <hr/>
+
+  <h3>Teaching Assistantships</h3>
+  <div class="exp-entry" style="margin-top:.5rem">
+    <div class="exp-header">
+      <span class="exp-role">Teaching Assistant (M.Tech Programme)</span>
+      <span class="exp-period">2021 – 2023</span>
+    </div>
+    <div class="exp-org">BITS Pilani, India</div>
+    <div class="exp-desc">
+      TA for three graduate courses: <strong>NLP Applications</strong> [Winter 2023], <strong>Deep Learning</strong> [Fall 2021], <strong>Deep Reinforcement Learning</strong> [Spring 2021]. Responsibilities: webinar demonstrations, labs, quizzes, exam preparation, student mentoring. <em>Honorarium: USD $2,513.11 across all three courses.</em>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <h2>Education</h2>
+
+  <div class="edu-entry">
+    <div class="edu-degree">M.Tech in Data Science &amp; Engineering</div>
+    <div class="edu-school">Birla Institute of Technology and Science (BITS Pilani), Pilani, India — 2019–2021</div>
+    <div class="edu-detail">GPA: 9.08/10 &nbsp;·&nbsp; Distinction &nbsp;·&nbsp; Top 5% out of 600</div>
+    <div class="edu-detail" style="color:#444;font-family:'Inter',sans-serif;font-size:.82rem;margin-top:.2rem">Courses: NLP, Machine Learning, Deep Learning, Data Science, Mathematics, Statistics, Data Mining, Big Data Systems</div>
+    <div class="edu-detail" style="color:#444;font-family:'Inter',sans-serif;font-size:.82rem;margin-top:.1rem">Dissertation: Collaborative Federated Learning (CFL) cloud system separating PHI/PII for privacy-preserving GPT-like systems (published SpringerNature)</div>
+  </div>
+
+  <div class="edu-entry">
+    <div class="edu-degree">B.Tech in Computer Science &amp; Engineering</div>
+    <div class="edu-school">West Bengal University of Technology (WBUT), Kolkata, India — 2006–2010</div>
+    <div class="edu-detail">GPA: 8.49/10 &nbsp;·&nbsp; Top 5% out of 70</div>
+    <div class="edu-detail" style="color:#444;font-family:'Inter',sans-serif;font-size:.82rem;margin-top:.2rem">Courses: Mathematics, Statistics, Algorithms, AI, Probability, Data Structures, Programming</div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <h2>Technical Skills</h2>
+
+  <div class="skill-group">
+    <span class="skill-label">NLP &amp; AI Safety: </span>
+    <span class="skill-val">Foundation Models, LLM Alignment &amp; Safety, Mechanistic Interpretability, AI Deception Detection, Misalignment Monitoring, Belief &amp; Knowledge Editing in LLMs, AI Agents, Conversational Systems, Generative AI, Explainable AI (XAI), Fine-tuning via HuggingFace, Hybrid &amp; Multi-hop RAG</span>
+  </div>
+
+  <div class="skill-group">
+    <span class="skill-label">LLMs (hands-on): </span>
+    <span class="skill-val">DeepSeek, GPT, LLaMA, Gemma, Mistral, Qwen, OLMo — base &amp; instruct variants; model fine-tuning, reasoning, NeuroSymbolic AI, ethics &amp; trustworthiness, evaluation &amp; benchmarking</span>
+  </div>
+
+  <div class="skill-group">
+    <span class="skill-label">Deep Learning: </span>
+    <span class="skill-val">Transformer, GPT, Autoregressive Generative Models, CNN, RNN, Neural Networks</span>
+  </div>
+
+  <div class="skill-group">
+    <span class="skill-label">ML &amp; Data Science: </span>
+    <span class="skill-val">Text &amp; Multimodal Data curation, Regression, Classification, Clustering, Tree-Based Algorithms, Bagging, Boosting</span>
+  </div>
+
+  <div class="skill-group">
+    <span class="skill-label">Programming: </span>
+    <span class="skill-val">Python, Java, C, Objective-C</span>
+  </div>
+
+  <div class="skill-group">
+    <span class="skill-label">Frameworks &amp; Tools: </span>
+    <span class="skill-val">PyTorch, LlamaIndex, LangChain, Scikit-learn, NumPy, Pandas, NLTK, SpaCy, TensorFlow, Keras, Flask, NodeJS, Docker, Kubernetes, Git, PostgreSQL, MySQL</span>
+  </div>
+
+  <div class="skill-group">
+    <span class="skill-label">Cloud: </span>
+    <span class="skill-val">AWS (EC2), Azure, IBM Cloud, Watson ML; inference deployment systems</span>
+  </div>
+
+  <div class="skill-group">
+    <span class="skill-label">Domains: </span>
+    <span class="skill-val">Cancer Genomics, Bioinformatics, Healthcare AI, Real Estate, Finance &amp; Banking</span>
+  </div>
+</section>
 
 <!-- CONTACT -->
-
+<section id="contact">
+  <h2>Contact</h2>
+  <p style="font-family:'Inter',sans-serif;font-size:.9rem;color:#222;line-height:1.8">
+    I am actively seeking <strong>fully-funded PhD positions</strong> in AI Safety, NLP, and LLM Alignment (2026 intake).<br/>
+    I welcome contact from faculty and researchers working on interpretable, responsible, and safe AI systems.
+  </p>
+  <p style="font-family:'Inter',sans-serif;font-size:.9rem;margin-top:.75rem">
+    <strong>Email:</strong> <a href="mailto:technical.partha@gmail.com">technical.partha@gmail.com</a><br/>
+    <strong>LinkedIn:</strong> <a href="https://in.linkedin.com/in/partha121" target="_blank">linkedin.com/in/partha121</a><br/>
+    <strong>GitHub:</strong> <a href="https://github.com/pps121" target="_blank">github.com/pps121</a><br/>
+    <strong>CV:</strong> <a href="images/CV_Partha.pdf" target="_blank">Download PDF</a>
+  </p>
+</section>
 
 <footer>
-  <p>
-    &copy; 2026 Partha Pratim Saha &nbsp;&middot;&nbsp;
-    <a href="https://github.com/pps121/pps121.github.io" target="_blank">Source on GitHub</a>
-    &nbsp;&middot;&nbsp; Built for research, driven by geometry.
-  </p>
+  &copy; 2026 Partha Pratim Saha &nbsp;&middot;&nbsp; West Bengal, India
 </footer>
 
 </body>
